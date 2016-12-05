@@ -1,0 +1,235 @@
+
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en">
+<!--<![endif]-->
+<!-- BEGIN HEAD -->
+<head>
+    <meta charset="utf-8"/>
+    <title>{% block title %}{{ 'NRB Homes'|trans }}{% endblock %}</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <meta content="" name="description"/>
+    <meta content="" name="author"/>
+    <!-- BEGIN GLOBAL MANDATORY STYLES -->
+
+    {% block stylesheets %}
+        {% stylesheets
+        'assets/plugins/font-awesome/css/font-awesome.min.css'
+        'assets/plugins/simple-line-icons/simple-line-icons.min.css'
+        'assets/plugins/bootstrap/css/bootstrap.min.css'
+        'assets/plugins/icheck/skins/square/green.css'
+        'assets/plugins/bootstrap-datepicker/css/datepicker.css'
+        'assets/plugins/select2/select2.css'
+        'assets/plugins/jquery-multi-select/css/multi-select.css'
+        'assets/css/components-rounded.css'
+        'assets/css/plugins.css'
+        'assets/layout3/css/layout.css'
+        'assets/layout3/css/themes/default.css'
+        'assets/layout3/css/custom.css'
+        'assets/css/style.css'
+        filter='cssrewrite' %}
+        <link rel="stylesheet" href="{{ asset_url }}"/>
+        {% endstylesheets %}
+    {% endblock %}
+
+    <!-- END THEME STYLES -->
+    <link rel="shortcut icon" href="/favicon.ico"/>
+</head>
+<!-- END HEAD -->
+<!-- BEGIN BODY -->
+<!-- DOC: Apply "page-header-menu-fixed" class to set the mega menu fixed  -->
+<!-- DOC: Apply "page-header-top-fixed" class to set the top menu fixed  -->
+<body>
+
+<!-- BEGIN HEADER -->
+<div class="page-header">
+<!-- BEGIN HEADER TOP -->
+<div class="page-header-top">
+<div class="container-fluid">
+<!-- BEGIN LOGO -->
+
+<div class="page-logo">
+    {#<a href="/"><img src="{{ asset('img/bd_gov.png') }}" alt="logo" width="40px" height="40px" class="logo-default pull-left"></a>#}
+
+    <h1>{{ 'NRB Homes'|trans }} </h1>
+</div>
+
+<!-- END LOGO -->
+
+    <!-- BEGIN TOP NAVIGATION MENU -->
+    <div class="top-menu">
+        <div style="float: right">
+            {#<p>{{ (app.user.groups[0] is defined) ? app.user.groups[0].name ~' ' ~ 'Logged in as'|trans : '' }}</p>
+            <p>{{ (app.user is defined) ? app.user.profile.fullNameEn : '' }}</p>#}
+        </div>
+        <ul class="nav navbar-nav">
+            <!-- BEGIN INBOX DROPDOWN -->
+            <ul class="nav navbar-nav ">
+                {% block top_nav_bar %}
+                {% endblock top_nav_bar %}
+            </ul>
+            <!-- END INBOX DROPDOWN -->
+            {% if app.user %}
+                <li class="dropdown dropdown-user dropdown-dark">
+                    <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+                        {#<img alt="" class="img-circle" src="{{ asset(app.user.profile.photo) }}">#}
+                    </a>
+                </li>
+            {% endif %}
+            <!-- BEGIN USER LOGIN DROPDOWN -->
+            <!-- END USER LOGIN DROPDOWN -->
+        </ul>
+    </div>
+    <!-- END TOP NAVIGATION MENU -->
+
+
+
+    <!-- BEGIN RESPONSIVE MENU TOGGLER -->
+    <a href="javascript:;" class="menu-toggler"></a>
+    <!-- END RESPONSIVE MENU TOGGLER -->
+</div>
+</div>
+<!-- END HEADER TOP -->
+<!-- BEGIN HEADER MENU -->
+<div class="page-header-menu">
+<div class="container">
+<!-- BEGIN MEGA MENU -->
+{% include "menu.html.twig" %}
+<!-- END MEGA MENU -->
+</div>
+</div>
+<!-- END HEADER MENU -->
+</div>
+<!-- END HEADER -->
+<!-- BEGIN PAGE CONTAINER -->
+<div class="page-container">
+    <!-- BEGIN PAGE CONTENT -->
+    <div class="page-content">
+        <div class="container-fluid">
+            {% block body %}
+            <!-- BEGIN PAGE BREADCRUMB -->
+            <ul class="page-breadcrumb breadcrumb">
+                <li>
+                    <a href="#">Home</a><i class="fa fa-circle"></i>
+                </li>
+                <li>
+                    <a href="layout_blank_page.html">Features</a>
+                    <i class="fa fa-circle"></i>
+                </li>
+                <li class="active">
+                    Blank Page Layout
+                </li>
+            </ul>
+            <!-- END PAGE BREADCRUMB -->
+            <!-- BEGIN PAGE CONTENT INNER -->
+            <div class="portlet light">
+                <div class="portlet-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            Page content goes here
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- END PAGE CONTENT INNER -->
+            {% endblock %}
+        </div>
+
+    </div>
+    <!-- END PAGE CONTENT -->
+</div>
+<!-- END PAGE CONTAINER -->
+
+<!-- BEGIN FOOTER -->
+<div class="page-footer">
+    <div class="container">
+        <div class="row">
+            <div class="footer">
+                <div class="copyright">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p>Copyright &copy; 2016 NRB Houses.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="scroll-to-top">
+    <i class="icon-arrow-up"></i>
+</div>
+
+<!-- END MODAL FORM-->
+<!-- END FOOTER -->
+
+<script type="text/javascript">
+    var BASEURL = '{{ url('dashboard') }}';
+</script>
+
+<!-- BEGIN CORE PLUGINS -->
+{% block include_javascripts %}
+    {% javascripts
+    'assets/plugins/jquery.min.js'
+    'assets/plugins/jquery-migrate.min.js'
+    'assets/plugins/jquery-ui/jquery-ui-1.10.3.custom.min.js'
+    'assets/plugins/bootstrap/js/bootstrap.min.js'
+    'assets/plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js'
+    'assets/plugins/jquery.cokie.min.js'
+    'assets/plugins/icheck/icheck.min.js'
+    'assets/plugins/jquery-validation/js/jquery.validate.min.js'
+    'assets/plugins/jquery-validation/js/localization/messages_bn_BD.js'
+    'assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js'
+    'assets/plugins/select2/select2.min.js'
+    'assets/plugins/jquery-multi-select/js/jquery.multi-select.js'
+    'assets/plugins/jquery.blockui.min.js'
+    'assets/plugins/jquery-inputmask/jquery.inputmask.bundle.min.js'
+    'assets/layout3/js/metronic.js'
+    'assets/layout3/js/layout.js'
+    'assets/js/form-input-mask.js'
+    'assets/js/jquery.floatThead.min.js'
+    'assets/plugins/bootbox/bootbox.min.js'
+    'assets/js/app.js'
+    %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+    {# 'bundles/syliusresource/js/form-collection.js' #}
+
+    <!--[if lt IE 9]>
+    {% javascripts
+    'assets/plugins/excanvas.min.js'
+    'assets/plugins/respond.min.js'
+    %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+    <![endif]-->
+
+    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+    <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
+
+{% endblock include_javascripts %}
+<!-- END CORE PLUGINS -->
+
+<!-- START IN PAGE JAVASCRIPTS -->
+{% block closure %}
+    <script>
+        jQuery(document).ready(function() {
+            Metronic.init(); // init metronic core components
+            Layout.init(); // init current layout
+
+            {% block document_ready %}
+            {% endblock %}
+        });
+    </script>
+{% endblock %}
+<!-- END IN PAGE JAVASCRIPTS -->
+
+<!-- END JAVASCRIPTS -->
+</body>
+<!-- END BODY -->
+</html>

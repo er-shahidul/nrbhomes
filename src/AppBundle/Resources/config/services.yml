@@ -1,0 +1,4 @@
+services:
+    app_bundle.service.nrbhome_manager:
+       class:        AppBundle\Service\NrbHomeManager
+       arguments:    ["@doctrine.orm.entity_manager"]

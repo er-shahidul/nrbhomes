@@ -1,0 +1,40 @@
+{% extends "modal.html.twig" %}
+
+{% block modal_title %}
+    {{ 'Add Mouza'|trans }}
+{% endblock %}
+
+{% block modal_content %}
+    <form class="form-horizontal" id="form_create_mouza" role="form" method="post" action="">
+        <div class="form-body">
+            <div class="form-group">
+                <label class="col-md-3 control-label">{{ 'Name'|trans }}</label>
+                <div class="col-md-7">
+                    {{ form_widget(form.name) }}
+                    <span class="error">{{ form_errors(form.name) }}</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-3 control-label">{{ 'Upazila Name'|trans }}</label>
+                <div class="col-md-7">
+                    {{ form_widget(form.upozila) }}
+                    <span class="error">{{ form_errors(form.upozila) }}</span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-3 control-label">{{ 'GEO Code'|trans }}</label>
+                <div class="col-md-7">
+                    {{ form_widget(form.bbsGeocode) }}
+                    <span class="error"></span>
+                </div>
+            </div>
+        </div>
+        {{ form_row(form._token) }}
+    </form>
+{% endblock %}
+
+{% block modal_button %}
+    <button type="button" id="mouza_add_button" class="btn green">{{ 'Save'|trans }}</button>
+{% endblock %}
+

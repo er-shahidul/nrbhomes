@@ -1,0 +1,13 @@
+dashboard:
+    path:     /dashboard
+    defaults: { _controller: AppBundle:Dashboard:index }
+
+purchased_land_add:
+    path:     /purchased-land-add
+    defaults: { _controller: AppBundle:PurchasedLand:createPurchasedLand }
+
+mouza_add:
+    path:     /mouza/add
+    defaults: { _controller: AppBundle:Mouza:createMouza }
+    options:
+            expose: true

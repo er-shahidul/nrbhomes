@@ -1,0 +1,6 @@
+services:
+    rs_user.registration_complet:
+        class: UserBundle\EventListener\RegistrationConfirmListener
+        arguments: ["@router"]
+        tags:
+            - { name: kernel.event_subscriber }

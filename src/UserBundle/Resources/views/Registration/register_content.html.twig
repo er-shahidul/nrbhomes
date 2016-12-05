@@ -1,0 +1,162 @@
+{{ form_start(form, {'method': 'POST', 'attr': {'class': 'form-horizontal'} }) }}
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel-group">
+            <div class="panel panel-info">
+                <div class="panel-heading">{{ 'User Profile Information'|trans }}</div>
+                <div class="panel-body">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">{{ "Name (English)"|trans }}</label>
+                            <div class="col-sm-8">
+                                {{ form_widget(form.profile.fullNameEn, {'attr': {'class': 'form-control'}}) }}
+                                {{ form_errors(form.profile.fullNameEn) }}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">{{ "Father's Name (English)"|trans }}</label>
+                            <div class="col-sm-8">
+                                {{ form_widget(form.profile.fathersFullNameEn, {'attr': {'class': 'form-control'}}) }}
+                                {{ form_errors(form.profile.fathersFullNameEn) }}
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">{{ "Mother's Name (English)"|trans }}</label>
+                            <div class="col-sm-8">
+                                {{ form_widget(form.profile.mothersFullNameEn, {'attr': {'class': 'form-control'}}) }}
+                                {{ form_errors(form.profile.mothersFullNameEn) }}
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">{{ "Present Adderss"|trans }}</label>
+                            <div class="col-sm-8">
+                                {{ form_widget(form.profile.currentAddress, {'attr': {'class': 'form-control'}}) }}
+                                {{ form_errors(form.profile.currentAddress) }}
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">{{ "National Id"|trans }}</label>
+                            <div class="col-sm-8">
+                                {{ form_widget(form.profile.nid, {'attr': {'class': 'form-control'}}) }}
+                                {{ form_errors(form.profile.nid) }}
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">{{ "Mobile Number"|trans }}</label>
+                            <div class="col-sm-8">
+                                {{ form_widget(form.profile.cellphone, {'attr': {'class': 'form-control'}}) }}
+                                {{ form_errors(form.profile.cellphone) }}
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-sm-6">
+
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">{{ "Name (Bangla)"|trans }}</label>
+                            <div class="col-sm-8">
+                                {{ form_widget(form.profile.fullNameBn, {'attr': {'class': 'form-control'}}) }}
+                                {{ form_errors(form.profile.fullNameBn) }}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">{{ "Father's Name (Bangla)"|trans }}</label>
+                            <div class="col-sm-8">
+                                {{ form_widget(form.profile.fathersFullNameBn, {'attr': {'class': 'form-control'}}) }}
+                                {{ form_errors(form.profile.fathersFullNameBn) }}
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">{{ "Mother's Name (Bangla)"|trans }}</label>
+                            <div class="col-sm-8">
+                                {{ form_widget(form.profile.mothersFullNameBn, {'attr': {'class': 'form-control'}}) }}
+                                {{ form_errors(form.profile.mothersFullNameBn) }}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">{{ "Permanent Adderss"|trans }}</label>
+                            <div class="col-sm-8">
+                                {{ form_widget(form.profile.permanentAddress, {'attr': {'class': 'form-control'}}) }}
+                                {{ form_errors(form.profile.permanentAddress) }}
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">{{ "Designation"|trans }}</label>
+                            <div class="col-sm-8">
+                                {{ form_widget(form.profile.designation, {'attr': {'class': 'form-control'}}) }}
+                                {{ form_errors(form.profile.designation) }}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">{{ "Gender"|trans }}</label>
+                            <div class="col-sm-8">
+                                {{ form_widget(form.profile.gender, {'attr': {'class': ''}}) }}
+                                {{ form_errors(form.profile.gender) }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-info">
+                <div class="panel-heading">{{ 'User Login Information'|trans }}</div>
+                <div class="panel-body">
+                    <div class="col-sm-6">
+
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">{{ "Username"|trans }}:</label>
+                            <div class="col-sm-8">
+                                {{ form_widget(form.username, {'attr': {'class': 'form-control'}}) }}
+                                {{ form_errors(form.username) }}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">{{ "Password"|trans }}:</label>
+                            <div class="col-sm-8">
+                                {{ form_widget(form.plainPassword.first, {'attr': {'class': 'form-control'}}) }}
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div class="col-sm-6">
+
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">{{ "Email"|trans }}:</label>
+                            <div class="col-sm-8">
+                                {{ form_widget(form.email, {'attr': {'class': 'form-control'}}) }}
+                                {{ form_errors(form.email) }}
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">{{ "Confirm Password"|trans }}:</label>
+                            <div class="col-sm-8">
+                                {{ form_widget(form.plainPassword.second, {'attr': {'class': 'form-control'}}) }}
+                                <span class="help-inline">{{ form_errors(form.plainPassword.first) }}</span>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+{{ form_rest(form) }}
+<hr>
+<div class="form-actions" style="text-align: center">
+    <button class="btn btn-primary" type="submit">{{ 'Save'|trans }}</button>
+</div>
+{#{{ form_row(form.submit, { 'attr': {'class': 'btn green'} }) }}#}
+
+{{ form_end(form) }}

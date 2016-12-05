@@ -1,0 +1,23 @@
+user_homepage:
+    path:     /
+    defaults: { _controller: UserBundle:Default:index }
+
+user_list:
+    path:  /users/list
+    defaults: { _controller: UserBundle:User:index}
+
+user_update:
+    path:  /user/update/{id}
+    defaults: { _controller: UserBundle:User:edit}
+
+user_delete:
+    path:  /user/delete/{id}
+    defaults: { _controller: UserBundle:User:delete}
+    options:
+           expose: true
+
+user_enabled:
+    path:  /user/enabled/{id}
+    defaults: { _controller: UserBundle:User:userEnabled}
+    options:
+            expose: true
