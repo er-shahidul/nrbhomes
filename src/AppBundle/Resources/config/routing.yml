@@ -2,6 +2,10 @@ dashboard:
     path:     /dashboard
     defaults: { _controller: AppBundle:Dashboard:index }
 
+purchased_land_list:
+    path:     /purchased-land-list
+    defaults: { _controller: AppBundle:PurchasedLand:index }
+
 purchased_land_add:
     path:     /purchased-land-add
     defaults: { _controller: AppBundle:PurchasedLand:createPurchasedLand }
@@ -11,3 +15,10 @@ mouza_add:
     defaults: { _controller: AppBundle:Mouza:createMouza }
     options:
             expose: true
+
+get_dagnumber_by_mouza:
+    path:     /mouza/{id}
+    defaults: { _controller: AppBundle:Mouza:getDagNumber }
+    options:
+            expose: true
+

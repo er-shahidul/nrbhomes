@@ -18,33 +18,8 @@ class NrbHomeManager
 
     public function createPurchasedLand($purchasedLand){
 
-        $newArr = array();
-
-        $arr = $purchasedLand->getPurchasedLandRelation();
-        foreach ($arr as $a) {
-
-            if (!empty($a->getNewDagNumber())) {
-                $newArr[] = array(
-                    'mouza' => $a->getMouza(),
-                    'newDagNumber' => $a->getNewDagNumber(),
-                );
-            }
-
-        }
-
         $this->em->persist($purchasedLand);
         $this->em->flush();
-
-        foreach ($newArr as $r) {
-            $newDagNo = new DagNumber();
-            $newDagNo->setMouza($r['mouza']);
-            $newDagNo->setDagNumber($r['NewDagNumber']);
-            $newDagNo->setApproved(true);
-            $this->em->persist($newDagNo);
-            $r['NewDagNumberObj'] = $newDagNo;
-        }
-
-        $purchasedLand->getDagNumberRelation();
     }
 
     public function createMouza($mouza){

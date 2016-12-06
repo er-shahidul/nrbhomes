@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\DagNumber;
 use AppBundle\Entity\Mouza;
 use AppBundle\Entity\PurchasedLandRelation;
 use AppBundle\Form\MouzaType;
@@ -32,6 +33,20 @@ class MouzaController extends Controller
         $data['form'] = $form->createView();
         return $this->render('AppBundle:Mouza:add-mouza.html.twig',$data);
 
+    }
+
+    public function getDagNumberAction(Mouza $mouza){
+
+        $childCategories = $this->getDoctrine()->getRepository('AppBundle:DagNumber')->getDagNumbersByMouza($mouza);
+        $data = array();
+        foreach ($childCategories as $childCategory) {
+            $data [] = '<option value="' . $childCategory->getId() . '">' . $childCategory->getDagNumberName() . '</option>';
+        }
+
+        $response = new Response(json_encode($data));
+        $response->headers->set('Content-Type', 'application/json');
+
+        return $response;
     }
 
 }

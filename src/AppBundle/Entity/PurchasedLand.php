@@ -19,12 +19,6 @@ class PurchasedLand
 {
 
     /**
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\PurchasedLandRelation", mappedBy="purchasedLand", cascade={"persist", "remove"})
-     * @ORM\OrderBy({"id" = "ASC"})
-     */
-    private $purchasedLandRelation;
-
-    /**
      * @var integer
      *
      * @ORM\Column(name="id", type="integer")
@@ -32,6 +26,13 @@ class PurchasedLand
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
+
+    /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\PurchasedLandRelation", mappedBy="purchasedLand", cascade={"persist", "remove"})
+     * @ORM\OrderBy({"id" = "ASC"})
+     */
+    private $purchasedLandRelation;
+
 
     /**
      * @var string

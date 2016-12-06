@@ -76,9 +76,7 @@ class UserController extends Controller
 
     public function userEnabledAction(User $user)
     {
-//        if (!$this->hasOfficeAccess($user)) {
-//            return $this->redirectToUserHomeWithError();
-//        }
+
         $enable = $this->isUserEnabled($user);
         $user->setEnabled($this->isUserEnabled($user));
 

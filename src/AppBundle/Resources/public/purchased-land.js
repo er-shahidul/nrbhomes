@@ -66,4 +66,31 @@ $(function() {
         return false;
     });
 
+
+    $('#purchased_land').on('change','.mouza_list',function () {
+
+        var elm = $(this);
+        var id = $(this).val();
+        //alert($(this).closest('tr').find('.dag_number_list option'));
+        if(id == ''){
+            $(this).closest('tr').find('.dag_number_list option').remove();
+            $(this).closest('tr').find('.dag_number_list').append('<option value="">Select</option>');
+            return false;
+        }
+        $.ajax({
+            url:Routing.generate('get_dagnumber_by_mouza',{id: id}),
+            dataType: 'json'
+        }).success(function ($msg) {
+
+            elm.closest('tr').find('.dag_number_list option').remove();
+            var totalOption = $msg.length;
+            elm.closest('tr').find('.dag_number_list').append('<option value="">Select</option>');
+            for (var i = 0; i < totalOption; i++) {
+                elm.closest('tr').find('.dag_number_list').append($msg[i]);
+            }
+            elm.closest('tr').find('.dag_number_list').append('<option value="-1">Not Listed/Make Own Dag Number</option>');
+        });
+    }).change();
+
+
 });

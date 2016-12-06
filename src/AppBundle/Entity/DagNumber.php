@@ -14,7 +14,7 @@ class DagNumber
 {
 
     /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Mouza")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Mouza", inversedBy="dagNumbers")
      * @ORM\JoinColumn(name="mouza_id", referencedColumnName="id")
      */
     private $mouza;
@@ -31,9 +31,9 @@ class DagNumber
     /**
      * @var string
      *
-     * @ORM\Column(name="dag_number", type="string", length=255, nullable=true)
+     * @ORM\Column(name="dag_number_name", type="string", length=255, nullable=true)
      */
-    private $dagNumber;
+    private $dagNumberName;
 
     /**
      * @var float
@@ -57,6 +57,9 @@ class DagNumber
         return $this->id;
     }
 
+    public function __toString() {
+        return $this->dagNumberName;
+    }
     /**
      * @return mixed
      */
@@ -76,17 +79,17 @@ class DagNumber
     /**
      * @return string
      */
-    public function getDagNumber()
+    public function getDagNumberName()
     {
-        return $this->dagNumber;
+        return $this->dagNumberName;
     }
 
     /**
-     * @param string $dagNumber
+     * @param string $dagNumberName
      */
-    public function setDagNumber($dagNumber)
+    public function setDagNumberName($dagNumberName)
     {
-        $this->dagNumber = $dagNumber;
+        $this->dagNumberName = $dagNumberName;
     }
 
     /**

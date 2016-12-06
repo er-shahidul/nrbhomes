@@ -13,5 +13,12 @@ use Doctrine\ORM\EntityRepository;
 class DagNumberRepository extends EntityRepository
 {
 
+    public function getDagNumbersByMouza($mouza){
+        $qb = $this->createQueryBuilder('d');
+        $qb->where('d.mouza = :mouza');
+        $qb->setParameter('mouza',$mouza);
+
+        return $qb->getQuery()->getResult();
+    }
 
 }

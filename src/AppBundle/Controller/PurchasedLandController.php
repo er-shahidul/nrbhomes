@@ -28,7 +28,7 @@ class PurchasedLandController extends Controller
             if ($form->isValid()) {
 
                 $this->get('app_bundle.service.nrbhome_manager')->createPurchasedLand($purchasedLand);
-
+                return $this->redirect($this->generateUrl('purchased_land_list'));
             }
         }
         $data['form'] = $form->createView();

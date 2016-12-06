@@ -20,6 +20,12 @@ class Mouza
     private $upozila;
 
     /**
+     * @var DagNumber[]
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\DagNumber", mappedBy="mouza")
+     */
+    private $dagNumbers;
+
+    /**
      * @var integer
      *
      * @ORM\Column(name="id", type="integer")
@@ -104,6 +110,25 @@ class Mouza
     {
         $this->name = $name;
     }
+
+    /**
+     * @return DagNumber[]
+     */
+    public function getDagNumbers()
+    {
+        return $this->dagNumbers;
+    }
+
+    /**
+     * @param DagNumber[] $dagNumbers
+     */
+    public function setDagNumbers($dagNumbers)
+    {
+        $this->dagNumbers = $dagNumbers;
+    }
+
+
+
     /**
      * @return string
      */

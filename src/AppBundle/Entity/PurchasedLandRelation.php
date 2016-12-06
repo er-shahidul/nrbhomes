@@ -30,11 +30,6 @@ class PurchasedLandRelation
     private $dagNumber;
 
     /**
-     * @var string
-     *
-     */
-    private $newDagNumber;
-    /**
      * @var integer
      *
      * @ORM\Column(name="id", type="integer")
@@ -125,22 +120,6 @@ class PurchasedLandRelation
     public function setDagNumber($dagNumber)
     {
         $this->dagNumber = $dagNumber;
-    }
-
-    /**
-     * @return string
-     */
-    public function getNewDagNumber()
-    {
-        return $this->newDagNumber;
-    }
-
-    /**
-     * @param string $newDagNumber
-     */
-    public function setNewDagNumber($newDagNumber)
-    {
-        $this->newDagNumber = $newDagNumber;
     }
 
     /**
