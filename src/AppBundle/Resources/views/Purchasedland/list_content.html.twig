@@ -1,0 +1,34 @@
+<table class="table table-bordered table-striped table-condensed flip-content table-list">
+    <thead>
+    <tr class="uppercase">
+        <th>{{ 'Owner Name'|trans }}</th>
+        <th>{{ 'Owner Address'|trans }}</th>
+        <th>{{ 'Land Type'|trans }}</th>
+        <th>{{ 'Total Land'|trans }}</th>
+        <th width="150px"></th>
+    </tr>
+    </thead>
+    <tbody>
+    {% if users is not empty %}
+        {% for user in users %}
+            <tr>
+                <td>{{ user.profile.fullNameEn }}</td>
+                <td>{{ user.profile.fathersFullNameEn }}</td>
+                <td>{{ user.profile.mothersFullNameEn }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.profile.cellphone }}</td>
+                <td>
+                    <a class="btn blue btn-sm" href="{{ path('user_update', {id: user.id}) }}"><i class="fa fa-edit"></i></a>
+                    <a class="btn red btn-sm" href="{{ path('user_delete', {id: user.id}) }}"><i class="fa fa-times"></i></a>
+                    <a title="{{ user.enabled ? 'Disable'|trans : 'Enable'|trans }}" class="btn blue btn-sm" href="{{ path('user_enabled', {id: user.id}) }}"><i class="fa fa-{{ user.enabled ? 'ban' : 'check-square-o' }}"></i></a>
+                </td>
+
+            </tr>
+        {% endfor %}
+    {% else %}
+        <tr class="ta-center">
+            <td colspan="15">{{ 'No record found'|trans }}</td>
+        </tr>
+    {% endif %}
+    </tbody>
+</table>
