@@ -3,7 +3,6 @@
     <tr class="uppercase">
         <th>{{ 'Full Name'|trans }}</th>
         <th>{{ 'Fathers Name'|trans }}</th>
-        <th>{{ 'Mothers Name'|trans }}</th>
         <th>{{ 'Email'|trans }}</th>
         <th>{{ 'Phone'|trans }}</th>
         <th width="150px"></th>
@@ -14,14 +13,15 @@
         {% for user in users %}
             <tr>
                 <td>{{ user.profile.fullNameEn }}</td>
-                <td>{{ user.profile.fathersFullNameEn }}</td>
-                <td>{{ user.profile.mothersFullNameEn }}</td>
+                <td>{{ user.profile.fathersFullNameBn }}</td>
                 <td>{{ user.email }}</td>
                 <td>{{ user.profile.cellphone }}</td>
                 <td>
                     <a class="btn blue btn-sm" href="{{ path('user_update', {id: user.id}) }}"><i class="fa fa-edit"></i></a>
-                    <a class="btn red btn-sm" href="{{ path('user_delete', {id: user.id}) }}"><i class="fa fa-times"></i></a>
+                    {% if user.id != app.user.id %}
+                    <a onclick="return confirm('Are you sure?')"  class="btn red btn-sm" href="{{ path('user_delete', {id: user.id, _token: csrf_token('delete_user')}) }}"><i class="fa fa-times"></i></a>
                     <a title="{{ user.enabled ? 'Disable'|trans : 'Enable'|trans }}" class="btn blue btn-sm" href="{{ path('user_enabled', {id: user.id}) }}"><i class="fa fa-{{ user.enabled ? 'ban' : 'check-square-o' }}"></i></a>
+                    {% endif %}
                 </td>
 
             </tr>

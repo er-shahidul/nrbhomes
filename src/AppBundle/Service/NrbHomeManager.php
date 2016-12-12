@@ -29,4 +29,14 @@ class NrbHomeManager
         $this->em->flush();
 
     }
+
+    public function createDagNumber($dagNumber){
+
+        $this->em->persist($dagNumber);
+
+        $this->em->flush();
+
+        return $dagNumber->getId();
+
+    }
 }

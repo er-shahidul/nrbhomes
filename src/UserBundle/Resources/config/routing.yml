@@ -13,6 +13,7 @@ user_update:
 user_delete:
     path:  /user/delete/{id}
     defaults: { _controller: UserBundle:User:delete}
+    methods: [GET]
     options:
            expose: true
 

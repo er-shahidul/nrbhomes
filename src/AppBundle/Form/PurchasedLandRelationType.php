@@ -33,7 +33,7 @@ class PurchasedLandRelationType extends AbstractType
             ->add('mouza', EntityType::class,
                 array(
                     'choice_label' => 'name',
-                    'attr' => array('class' => 'form-control select2 mouza_list'),
+                    'attr' => array('class' => 'form-control mouza_list'),
                     'class' => 'AppBundle\Entity\Mouza',
                     'placeholder' => 'Select',
                     'query_builder' => function(\Doctrine\ORM\EntityRepository $er) {
@@ -51,7 +51,7 @@ class PurchasedLandRelationType extends AbstractType
 
             $form->add('dagNumber', EntityType::class, array(
                 'class'       => 'AppBundle:DagNumber',
-                'attr' => array('class' => 'form-control select2  dag_number_list'),
+                'attr' => array('class' => 'form-control dag_number_list'),
                 'placeholder' => 'Select',
                 'choices'     => $dagNumbers,
             ));

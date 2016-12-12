@@ -12,7 +12,12 @@ class PurchasedLandController extends Controller
 {
     public function indexAction()
     {
-
+        $em = $this->getDoctrine()->getManager();
+        $purchasedLands = $em->getRepository('AppBundle:PurchasedLand')->getPurchasedLandList();
+        //var_dump($purchasedLands);die;
+        return $this->render('AppBundle:Purchasedland:index.html.twig', array(
+            'lands'=>$purchasedLands
+        ));
     }
 
     public function createPurchasedLandAction(Request $request )
@@ -33,6 +38,28 @@ class PurchasedLandController extends Controller
         }
         $data['form'] = $form->createView();
         $data['form_action'] = $this->generateUrl('purchased_land_add');
+        return $this->render('AppBundle:Purchasedland:add.html.twig',$data);
+
+    }
+
+    public function updatePurchasedLandAction(Request $request, PurchasedLand $purchasedLand )
+    {
+
+        //$purchasedLand = new PurchasedLand();
+
+        $form = $this->createForm(PurchasedLandType::class, $purchasedLand);
+
+        if ($request->isMethod('POST')) {
+
+            $form->handleRequest($request);
+            if ($form->isValid()) {
+
+                $this->get('app_bundle.service.nrbhome_manager')->createPurchasedLand($purchasedLand);
+                return $this->redirect($this->generateUrl('purchased_land_list'));
+            }
+        }
+        $data['form'] = $form->createView();
+        $data['form_action'] = $this->generateUrl('purchased_land_update',array('id'=>$purchasedLand->getId()));
         return $this->render('AppBundle:Purchasedland:add.html.twig',$data);
 
     }

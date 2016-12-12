@@ -10,6 +10,10 @@ purchased_land_add:
     path:     /purchased-land-add
     defaults: { _controller: AppBundle:PurchasedLand:createPurchasedLand }
 
+purchased_land_update:
+    path:     /purchased-land-edit/{id}
+    defaults: { _controller: AppBundle:PurchasedLand:updatePurchasedLand }
+
 mouza_add:
     path:     /mouza/add
     defaults: { _controller: AppBundle:Mouza:createMouza }
@@ -17,8 +21,20 @@ mouza_add:
             expose: true
 
 get_dagnumber_by_mouza:
-    path:     /mouza/{id}
-    defaults: { _controller: AppBundle:Mouza:getDagNumber }
+    path:     /mouza/{id}/{dagId}
+    defaults:
+            _controller: AppBundle:DagNumber:getDagNumber
+            mouzaId: 0
+            dagId: 0
+    methods: [GET]
+    options:
+           expose: true
+
+dag_number_add:
+    path:     /dagnumber/{mouzaId}/add
+    defaults:
+            _controller: AppBundle:DagNumber:createDagNumber
+            mouzaId: 0
+    methods: [GET,POST]
     options:
             expose: true
-

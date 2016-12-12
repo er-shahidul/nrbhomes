@@ -51,9 +51,9 @@ $(function() {
             dataType : "html",
             success: function( response ) {
                 if(response=="SUCCESS"){
-                    console.log(response);
+
                     $('#ajax').modal('hide');
-                    //$('#ajax').dialog('close');
+
                     return ;
                 }
 
@@ -71,14 +71,81 @@ $(function() {
 
         var elm = $(this);
         var id = $(this).val();
-        //alert($(this).closest('tr').find('.dag_number_list option'));
+
+
         if(id == ''){
             $(this).closest('tr').find('.dag_number_list option').remove();
             $(this).closest('tr').find('.dag_number_list').append('<option value="">Select</option>');
             return false;
         }
+        getDagNumberByMouza(id, elm);
+
+    }).change();
+
+
+    $('#purchased_land').on('change','.dag_number_list',function () {
+        $('#record-list-dag').find('tr').removeClass('active_record');
+        var dag_number_id = $(this).val();
+        var active_tr = $(this).closest('tr');
+        var mouza_id = $(this).closest('tr').find('.mouza_list').val() ;
+
+        if(dag_number_id=='-1'){
+            var target = Routing.generate('dag_number_add',{mouzaId:mouza_id});
+            $(active_tr).addClass('active_record');
+
+            $("#ajax .modal-body").load(target, function() {
+
+                $("#ajax").modal("show");
+            });
+        }
+    }).change();
+
+
+    $("#ajax").on('click','#dag_number_add_button',function (e) {
+
+
+        var data = $('#form_create_dag_number').serializeArray();
+        var mouza_id = $("#ajax").find("#dag_number_mouza").val();
+        var elm = $('#record-list-dag').find('.active_record').find('.mouza_list');
         $.ajax({
-            url:Routing.generate('get_dagnumber_by_mouza',{id: id}),
+            url: Routing.generate('dag_number_add',{mouzaId:mouza_id}),
+            data: data,
+            type: "POST",
+            dataType : "html",
+            success: function( response ) {
+                var succ_search = response.search("succ");
+
+                if(succ_search!=-1)
+                {
+
+                    var res_parse =  JSON.parse(response);
+                    var dagId = res_parse.newDagNumber;
+                    if(res_parse.succ=="SUCCESS"){
+
+                        $('#record-list-dag').find('tr').removeClass('active_record');
+
+                        $('#ajax').modal('hide');
+
+                        getDagNumberByMouza(mouza_id,elm, dagId);
+
+                        return ;
+
+                    }
+                }
+
+                $( '#mod-content' ).html( response );
+
+
+            }
+        });
+
+        return false;
+    });
+
+    function getDagNumberByMouza(id, elm, dagId){
+
+        $.ajax({
+            url:Routing.generate('get_dagnumber_by_mouza',{id: id, dagId:dagId}),
             dataType: 'json'
         }).success(function ($msg) {
 
@@ -90,7 +157,5 @@ $(function() {
             }
             elm.closest('tr').find('.dag_number_list').append('<option value="-1">Not Listed/Make Own Dag Number</option>');
         });
-    }).change();
-
-
+    }
 });

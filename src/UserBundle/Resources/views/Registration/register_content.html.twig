@@ -13,19 +13,12 @@
                                 {{ form_errors(form.profile.fullNameEn) }}
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label class="col-sm-4 control-label">{{ "Father's Name (English)"|trans }}</label>
-                            <div class="col-sm-8">
-                                {{ form_widget(form.profile.fathersFullNameEn, {'attr': {'class': 'form-control'}}) }}
-                                {{ form_errors(form.profile.fathersFullNameEn) }}
-                            </div>
-                        </div>
 
                         <div class="form-group">
-                            <label class="col-sm-4 control-label">{{ "Mother's Name (English)"|trans }}</label>
+                            <label class="col-sm-4 control-label">{{ "Mobile Number"|trans }}</label>
                             <div class="col-sm-8">
-                                {{ form_widget(form.profile.mothersFullNameEn, {'attr': {'class': 'form-control'}}) }}
-                                {{ form_errors(form.profile.mothersFullNameEn) }}
+                                {{ form_widget(form.profile.cellphone, {'attr': {'class': 'form-control'}}) }}
+                                {{ form_errors(form.profile.cellphone) }}
                             </div>
                         </div>
 
@@ -45,13 +38,6 @@
                             </div>
                         </div>
 
-                        <div class="form-group">
-                            <label class="col-sm-4 control-label">{{ "Mobile Number"|trans }}</label>
-                            <div class="col-sm-8">
-                                {{ form_widget(form.profile.cellphone, {'attr': {'class': 'form-control'}}) }}
-                                {{ form_errors(form.profile.cellphone) }}
-                            </div>
-                        </div>
 
                     </div>
                     <div class="col-sm-6">
@@ -64,7 +50,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-4 control-label">{{ "Father's Name (Bangla)"|trans }}</label>
+                            <label class="col-sm-4 control-label">{{ "Father's Name"|trans }}</label>
                             <div class="col-sm-8">
                                 {{ form_widget(form.profile.fathersFullNameBn, {'attr': {'class': 'form-control'}}) }}
                                 {{ form_errors(form.profile.fathersFullNameBn) }}
@@ -72,25 +58,10 @@
                         </div>
 
                         <div class="form-group">
-                            <label class="col-sm-4 control-label">{{ "Mother's Name (Bangla)"|trans }}</label>
-                            <div class="col-sm-8">
-                                {{ form_widget(form.profile.mothersFullNameBn, {'attr': {'class': 'form-control'}}) }}
-                                {{ form_errors(form.profile.mothersFullNameBn) }}
-                            </div>
-                        </div>
-                        <div class="form-group">
                             <label class="col-sm-4 control-label">{{ "Permanent Adderss"|trans }}</label>
                             <div class="col-sm-8">
                                 {{ form_widget(form.profile.permanentAddress, {'attr': {'class': 'form-control'}}) }}
                                 {{ form_errors(form.profile.permanentAddress) }}
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="col-sm-4 control-label">{{ "Designation"|trans }}</label>
-                            <div class="col-sm-8">
-                                {{ form_widget(form.profile.designation, {'attr': {'class': 'form-control'}}) }}
-                                {{ form_errors(form.profile.designation) }}
                             </div>
                         </div>
                         <div class="form-group">

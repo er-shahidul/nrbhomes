@@ -9,18 +9,16 @@
     </tr>
     </thead>
     <tbody>
-    {% if users is not empty %}
-        {% for user in users %}
+    {% if lands is not empty %}
+        {% for land in lands %}
             <tr>
-                <td>{{ user.profile.fullNameEn }}</td>
-                <td>{{ user.profile.fathersFullNameEn }}</td>
-                <td>{{ user.profile.mothersFullNameEn }}</td>
-                <td>{{ user.email }}</td>
-                <td>{{ user.profile.cellphone }}</td>
+                <td>{{ land[0].landOwnerName }}</td>
+                <td>{{ land[0].address }}</td>
+                <td>{{ land[0].landType }}</td>
+                <td>{{ land.totalArea }}</td>
                 <td>
-                    <a class="btn blue btn-sm" href="{{ path('user_update', {id: user.id}) }}"><i class="fa fa-edit"></i></a>
-                    <a class="btn red btn-sm" href="{{ path('user_delete', {id: user.id}) }}"><i class="fa fa-times"></i></a>
-                    <a title="{{ user.enabled ? 'Disable'|trans : 'Enable'|trans }}" class="btn blue btn-sm" href="{{ path('user_enabled', {id: user.id}) }}"><i class="fa fa-{{ user.enabled ? 'ban' : 'check-square-o' }}"></i></a>
+                    <a class="btn blue btn-sm" href="{{ path('purchased_land_update', {id: land[0].id}) }}"><i class="fa fa-edit"></i></a>
+                   {# <a class="btn red btn-sm" href="{{ path('land_delete', {id: land.id}) }}"><i class="fa fa-times"></i></a>#}
                 </td>
 
             </tr>

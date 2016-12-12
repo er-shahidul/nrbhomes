@@ -6,6 +6,7 @@ use FOS\UserBundle\Event\GetResponseUserEvent;
 use FOS\UserBundle\Form\Factory\FactoryInterface;
 use FOS\UserBundle\FOSUserEvents;
 use FOS\UserBundle\Model\UserManagerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Finder\Exception\AccessDeniedException;
@@ -13,11 +14,15 @@ use Symfony\Component\Form\FormEvent;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\Security\Core\User\UserInterface;
 use UserBundle\Entity\User;
 
 class UserController extends Controller
 {
+    /**
+     * @Security("has_role('ROLE_ADMIN')")
+     */
    public function indexAction(){
 
        $em = $this->getDoctrine()->getManager();
@@ -73,7 +78,9 @@ class UserController extends Controller
         ));
     }
 
-
+    /**
+     * @Security("has_role('ROLE_ADMIN')")
+     */
     public function userEnabledAction(User $user)
     {
 
@@ -90,9 +97,15 @@ class UserController extends Controller
 
         return $this->redirect($this->generateUrl('user_list'));
     }
-
-    public function deleteAction(User $user)
+    /**
+     * @Security("has_role('ROLE_ADMIN')")
+     */
+    public function deleteAction(Request $request, User $user)
     {
+
+        if (!$this->isCsrfTokenValid('delete_user', $request->query->get('_token'))) {
+            throw new AccessDeniedHttpException('Invalid token');
+        }
         $user->setDeleted(true);
         $user->setEnabled(false);
 

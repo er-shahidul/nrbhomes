@@ -19,10 +19,12 @@ class ProfileForm extends AbstractType
     {
         $builder
             ->add('fullNameEn', TextType::class)
-            ->add('fullNameBn')
-            ->add('nid')
-            ->add('designation')
-
+            ->add('fullNameBn', TextType::class,array(
+                'required'=>false,
+            ))
+            ->add('nid', TextType::class,array(
+                'required'=>false,
+            ))
             ->add('cellphone')
 
             ->add('gender', ChoiceType::class, array(
@@ -32,10 +34,9 @@ class ProfileForm extends AbstractType
             ))
             ;
 
-        $builder->add('fathersFullNameBn');
-        $builder->add('fathersFullNameEn');
-        $builder->add('mothersFullNameBn');
-        $builder->add('mothersFullNameEn');
+        $builder->add('fathersFullNameBn', TextType::class,array(
+            'required'=>false,
+        ));
         $builder->add('currentAddress');
         $builder->add('permanentAddress');
 

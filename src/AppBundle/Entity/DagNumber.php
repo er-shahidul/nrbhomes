@@ -56,7 +56,10 @@ class DagNumber
     {
         return $this->id;
     }
-
+    public function __construct()
+    {
+        $this->setApproved(true);
+    }
     public function __toString() {
         return $this->dagNumberName;
     }

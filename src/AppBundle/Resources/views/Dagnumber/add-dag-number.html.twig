@@ -1,0 +1,41 @@
+{% extends "modal.html.twig" %}
+
+{% block modal_title %}
+    {{ 'Add Dag Number'|trans }}
+{% endblock %}
+
+{% block modal_content %}
+    <form class="form-horizontal" id="form_create_dag_number" role="form" method="post" action="">
+        <div class="form-body">
+            <div class="form-group">
+                <label class="col-md-3 control-label">{{ 'Name'|trans }}</label>
+                <div class="col-md-7">
+                    {{ form_widget(form.dagNumberName) }}
+                    <span class="error">{{ form_errors(form.dagNumberName) }}</span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-3 control-label">{{ 'Mouza Name'|trans }}</label>
+                <div class="col-md-7">
+                    {{ form_widget(form.mouza) }}
+                    <span class="error">{{ form_errors(form.mouza) }}</span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-3 control-label">{{ 'Total Area'|trans }}</label>
+                <div class="col-md-7">
+                    {{ form_widget(form.dagTotalArea) }}
+                    <span class="error"></span>
+                </div>
+            </div>
+        </div>
+        {{ form_row(form._token) }}
+    </form>
+{% endblock %}
+
+{% block modal_button %}
+    <button type="button" id="dag_number_add_button" class="btn green">{{ 'Save'|trans }}</button>
+{% endblock %}
+

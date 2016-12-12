@@ -53,10 +53,7 @@
                                     <span class="help-block"></span>
                                 </div>
                             </div>
-                            {#{{ dump(form.purchasedLandRelation) }}#}
-                            {% for entity in form.purchasedLandRelation %}
-                                {{ form_widget(entity.mouza) }}
-                            {% endfor %}
+
                         </div>
                         {{ form_row(form._token) }}
                         <table class="table table-bordered table-striped table-condensed flip-content table-list" style="margin-bottom: 0" id="table-dag" data-prototype="

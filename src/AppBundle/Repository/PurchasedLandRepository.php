@@ -16,4 +16,16 @@ class PurchasedLandRepository extends EntityRepository
         $this->_em->persist($data);
         $this->_em->flush();
     }
+
+    public function getPurchasedLandList(){
+
+        $qb = $this->_em->getRepository('AppBundle:PurchasedLand')->createQueryBuilder('pl');
+        $qb->select('pl');
+        $qb->addSelect('SUM(plr.purchasedTotalArea) AS totalArea');
+        $qb->join('pl.purchasedLandRelation', 'plr');
+        $qb->groupBy('plr.purchasedLand');
+        return $qb->getQuery()->getResult();
+
+    }
+
 }
