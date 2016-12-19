@@ -2,6 +2,33 @@ $(function() {
 
     if ($('#purchased_land').length) {
 
+        $('#form_create_purchased_land').validate({
+            errorElement: 'span', //default input error message container
+            errorClass: 'help-block help-block-error', // default input error message class
+            focusInvalid: false, // do not focus the last invalid input
+            ignore: "",  // validate all fields including form hidden input
+            rules:{
+                'purchased_land[landOwnerName]':"required",
+                'purchased_land[paidAmount]': {
+                    lessThan: '#purchased_land_totalAmount'
+                }
+
+            },
+            highlight: function (element) {
+                $(element)
+                    .closest('.form-group').addClass('has-error');
+            },
+
+            unhighlight: function (element) {
+                $(element)
+                    .closest('.form-group').removeClass('has-error');
+            },
+
+            submitHandler: function (form) {
+                form.submit();
+            }
+        });
+
         $("#add_more_owner").click(function(){
             $(".owner_info_panel").children().clone().appendTo(".add_owner_info_panel");
             $('.add_owner_info_panel .owner_panel_remove').removeClass('hidden');
@@ -141,6 +168,33 @@ $(function() {
 
         return false;
     });
+
+    new SFileInput('doc_file',{
+        button:'fileinput-new',
+        allowedType:'image',
+        selectedFileLabel:'selected_doc_file1',
+        multipleFile:true,
+        selectedFileClass:'selectedFileClass'
+    });
+
+    $('.remove_document').on('click', function(e){
+        e.preventDefault();
+        var elm= $(this);
+       var url = $(this).attr('href');
+        $.ajax({
+            url:url,
+            dataType: 'json'
+        }).success(function (response) {
+
+            if(response.status=='SUCCESS'){
+
+                elm.closest('tr').remove();
+            }
+
+            return false;
+        });
+    });
+
 
     function getDagNumberByMouza(id, elm, dagId){
 

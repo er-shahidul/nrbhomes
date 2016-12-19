@@ -1,0 +1,30 @@
+<table class="table table-bordered table-striped table-condensed flip-content table-list">
+    <thead>
+    <tr class="uppercase">
+        <th>{{ 'Mouza Name'|trans }}</th>
+        <th>{{ 'Upozila Name'|trans }}</th>
+        <th>{{ 'District Name'|trans }}</th>
+        {#<th width="150px"></th>#}
+    </tr>
+    </thead>
+    <tbody>
+    {% if mouzas is not empty %}
+        {% for mouza in mouzas %}
+            <tr>
+                <td>{{ mouza.name }}</td>
+                <td>{{ mouza.upozila.name }}</td>
+                <td>{{ mouza.upozila.district.name }}</td>
+                <td>
+                    {#<a class="btn blue btn-sm" href=""><i class="fa fa-edit"></i></a>#}
+                   {# <a class="btn red btn-sm" href="{{ path('land_delete', {id: land.id}) }}"><i class="fa fa-times"></i></a>#}
+                </td>
+
+            </tr>
+        {% endfor %}
+    {% else %}
+        <tr class="ta-center">
+            <td colspan="15">{{ 'No record found'|trans }}</td>
+        </tr>
+    {% endif %}
+    </tbody>
+</table>

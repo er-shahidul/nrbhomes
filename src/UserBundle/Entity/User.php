@@ -9,8 +9,15 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 /**
  * @ORM\Entity
  * @ORM\Table(name="users")
- * @UniqueEntity("username")
  * @ORM\Entity(repositoryClass="UserBundle\Repository\UserRepository")
+ * @UniqueEntity(
+ *     fields={"email"},
+ *     message="This email is already in use."
+ * )
+ * @UniqueEntity(
+ *     fields={"username"},
+ *     message="This username is already in use."
+ * )
  */
 class User extends BaseUser
 {
@@ -67,6 +74,7 @@ class User extends BaseUser
 
     /**
      * @param mixed $profile
+     * @return $this
      */
     public function setProfile($profile)
     {

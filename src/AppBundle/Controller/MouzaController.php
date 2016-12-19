@@ -11,6 +11,14 @@ use Symfony\Component\HttpFoundation\Response;
 class MouzaController extends Controller
 {
 
+    public function indexAction(){
+        $em = $this->getDoctrine()->getManager();
+        $mouzas = $em->getRepository('AppBundle:Mouza')->findBy(array('approved'=>1));
+        //var_dump($purchasedLands);die;
+        return $this->render('AppBundle:Mouza:list.html.twig', array(
+            'mouzas'=>$mouzas
+        ));
+    }
     public function createMouzaAction(Request $request )
     {
 
@@ -24,10 +32,11 @@ class MouzaController extends Controller
 
                 $this->get('app_bundle.service.nrbhome_manager')->createMouza($mouza);
 
-                return new Response('SUCCESS');
+                return $this->redirect($this->generateUrl('mouzas_list'));
             }
         }
         $data['form'] = $form->createView();
+        $data['form_action'] = $this->generateUrl('mouza_add');
         return $this->render('AppBundle:Mouza:add-mouza.html.twig',$data);
 
     }

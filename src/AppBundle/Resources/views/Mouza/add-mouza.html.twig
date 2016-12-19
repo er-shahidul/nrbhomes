@@ -1,12 +1,33 @@
-{% extends "modal.html.twig" %}
+{% extends "metronic.html.twig" %}
 
-{% block modal_title %}
-    {{ 'Add Mouza'|trans }}
-{% endblock %}
+{% block pageTitle %}<h1>{{ 'NRB HOMES'|trans }}</h1>{% endblock %}
 
-{% block modal_content %}
-    <form class="form-horizontal" id="form_create_mouza" role="form" method="post" action="">
-        <div class="form-body">
+{% block body %}
+    <ul class="page-breadcrumb breadcrumb">
+        <li>
+            <a href="{{ path('dashboard') }}">{{ 'Dashboard'|trans }}</a><i class="fa fa-circle"></i>
+        </li>
+        <li class="active">
+            {{ 'Add Mouza'|trans }}
+        </li>
+    </ul>
+<div class="row">
+    <form class="form-horizontal" id="form_create_mouza" role="form" method="post" action="{{ form_action }}">
+
+        <div class="col-md-12" id="purchased_land">
+            {#{% include 'flash.html.twig' %}#}
+            <div class="portlet light">
+
+                <div class="portlet-title">
+                    <div class="caption caption-md">
+                        <i class="icon-bar-chart theme-font hide"></i>
+                        <span class="caption-subject theme-font bold uppercase">{{ 'Purchased Land'|trans }}</span>
+                    </div>
+                </div>
+
+                <div class="portlet-body">
+
+                <div class="form-body">
             <div class="form-group">
                 <label class="col-md-3 control-label">{{ 'Name'|trans }}</label>
                 <div class="col-md-7">
@@ -31,10 +52,17 @@
             </div>
         </div>
         {{ form_row(form._token) }}
+        <div class="form-actions">
+            <div class="row">
+                <div class="col-md-offset-3 col-md-9">
+                    <button type="submit" class="btn green">{{ 'Save'|trans }}</button>
+                </div>
+            </div>
+        </div>
+                    </div>
+                </div>
+            </div>
     </form>
-{% endblock %}
-
-{% block modal_button %}
-    <button type="button" id="mouza_add_button" class="btn green">{{ 'Save'|trans }}</button>
+</div>
 {% endblock %}
 

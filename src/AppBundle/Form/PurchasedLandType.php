@@ -6,6 +6,7 @@ use AppBundle\Entity\PurchasedLandRelation;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -21,9 +22,23 @@ class PurchasedLandType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('landOwnerName', TextType::class)
-            ->add('address', TextType::class)
-            ->add('landType', TextType::class)
+            ->add('landOwnerName', TextType::class,array(
+                'attr' => array('class' => 'form-control')
+            ))
+            ->add('address',TextareaType::class ,array(
+                'attr' => array('class' => 'form-control')
+            ))
+            ->add('totalAmount', TextType::class,array(
+                'attr' => array('class' => 'form-control')
+            ))
+            ->add('paidAmount', TextType::class,array(
+                'attr' => array('class' => 'form-control'),
+                'required'=>false
+            ))
+            ->add('landType', TextType::class,array(
+                'attr' => array('class' => 'form-control'),
+                'required'=>false,
+            ))
             ->add('purchasedLandRelation', CollectionType::class, array(
                 'entry_type' => PurchasedLandRelationType::class,
                 'allow_add' => true,

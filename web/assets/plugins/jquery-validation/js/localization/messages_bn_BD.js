@@ -7,6 +7,18 @@ $.validator.addMethod("banglaDigitsOnly", function(value, element) {
     return this.optional(element) || /^[\১\২\৩\৪\৫\৬\৭\৮\৯\০]+$/i.test(value);
 }, "banglaDigitsOnly");
 
+$.validator.addMethod("lessThan",
+
+    function (value, element, param) {
+        var $min = $(param);
+        if (this.settings.onfocusout) {
+            $min.off(".validate-greaterThan").on("blur.validate-greaterThan", function () {
+                $(element).valid();
+            });
+        }
+        return parseInt(value) <= parseInt($min.val());
+    }, "Max must be greater than min");
+
 $.extend( $.validator.messages, {
     required: "এই তথ্যটি আবশ্যক।",
     remote: "এই তথ্যটি ঠিক করুন।",

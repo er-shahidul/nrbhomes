@@ -28,10 +28,17 @@ class PurchasedLand
     private $id;
 
     /**
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\PurchasedLandRelation", mappedBy="purchasedLand", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\PurchasedLandRelation", mappedBy="purchasedLand", cascade={"persist", "remove"}, orphanRemoval=true)
      * @ORM\OrderBy({"id" = "ASC"})
      */
     private $purchasedLandRelation;
+
+
+    /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Document", mappedBy="purchasedLand", cascade={"persist", "remove"})
+     * @ORM\OrderBy({"id" = "ASC"})
+     */
+    private $documents;
 
 
     /**
@@ -47,7 +54,19 @@ class PurchasedLand
      * @ORM\Column(name="address", type="text", nullable=true)
      */
     private $address;
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="total_amount", type="decimal", nullable=true)
+     */
+    private $totalAmount;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="paid_amount", type="decimal", nullable=true)
+     */
+    private $paidAmount;
 
     /**
      * @var string
@@ -102,6 +121,22 @@ class PurchasedLand
     }
 
     /**
+     * @return mixed
+     */
+    public function getDocuments()
+    {
+        return $this->documents;
+    }
+
+    /**
+     * @param mixed $documents
+     */
+    public function setDocuments($documents)
+    {
+        $this->documents = $documents;
+    }
+
+    /**
      * Set landOwnerName
      *
      * @param string $landOwnerName
@@ -147,6 +182,38 @@ class PurchasedLand
     public function getAddress()
     {
         return $this->address;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTotalAmount()
+    {
+        return $this->totalAmount;
+    }
+
+    /**
+     * @param string $totalAmount
+     */
+    public function setTotalAmount($totalAmount)
+    {
+        $this->totalAmount = $totalAmount;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPaidAmount()
+    {
+        return $this->paidAmount;
+    }
+
+    /**
+     * @param string $paidAmount
+     */
+    public function setPaidAmount($paidAmount)
+    {
+        $this->paidAmount = $paidAmount;
     }
 
 
