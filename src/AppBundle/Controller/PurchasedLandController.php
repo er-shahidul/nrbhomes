@@ -13,13 +13,24 @@ use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
 class PurchasedLandController extends Controller
 {
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
         $purchasedLands = $em->getRepository('AppBundle:PurchasedLand')->getPurchasedLandList();
         //var_dump($purchasedLands);die;
+        /*$em    = $this->get('doctrine.orm.entity_manager');
+        $dql   = "SELECT a FROM AppBundle:PurchasedLand a";
+        $query = $em->createQuery($dql)->getArrayResult();*/
+
+        $paginator  = $this->get('knp_paginator');
+        $paginations = $paginator->paginate(
+            $purchasedLands, /* query NOT result */
+            $request->query->getInt('page', 1)/*page number*/,
+            10/*limit per page*/
+        );
+        //var_dump(count($paginations));
         return $this->render('AppBundle:Purchasedland:index.html.twig', array(
-            'lands'=>$purchasedLands
+            'lands'=>$paginations
         ));
     }
 

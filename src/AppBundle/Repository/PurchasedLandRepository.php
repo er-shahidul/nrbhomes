@@ -24,7 +24,8 @@ class PurchasedLandRepository extends EntityRepository
         $qb->addSelect('SUM(plr.purchasedTotalArea) AS totalArea');
         $qb->join('pl.purchasedLandRelation', 'plr');
         $qb->groupBy('plr.purchasedLand');
-        return $qb->getQuery()->getResult();
+        $qb->orderBy('pl.id','ASC');
+        return $qb->getQuery()->getArrayResult();
 
     }
 
