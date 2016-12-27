@@ -18,7 +18,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
 
-class PurchasedLandRelationType extends AbstractType
+class PlotRecordRelationType extends AbstractType
 {
 
     /**
@@ -29,10 +29,7 @@ class PurchasedLandRelationType extends AbstractType
     {
 
         $builder
-            ->add('purchasedTotalArea',TextType::class,
-                array(
-                    'attr' => array('class' => 'form-control purchased_total_area'),
-                ))
+            ->add('dagArea',TextType::class)
             ->add('mouza', EntityType::class,
                 array(
                     'choice_label' => 'name',
@@ -40,10 +37,15 @@ class PurchasedLandRelationType extends AbstractType
                     'class' => 'AppBundle\Entity\Mouza',
                     'placeholder' => 'Select',
                     'query_builder' => function(\Doctrine\ORM\EntityRepository $er) {
-                        $qb = $er->createQueryBuilder('m')->where('m.approved=1')->orderBy('m.name', 'asc');
+                        $qb = $er->createQueryBuilder('m')
+                            ->Join('m.purchasedLandRelations', 'plr')
+                            ->distinct('m.id')
+                            ->where('m.approved=1')
+                            ->orderBy('m.name', 'asc');
                         return $qb;
                     },
-                    'required'=>false
+                    'required'=>false,
+                    'mapped' => false
                 )
             )
         ;
@@ -85,13 +87,13 @@ class PurchasedLandRelationType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\PurchasedLandRelation'
+            'data_class' => 'AppBundle\Entity\PlotRecordRelation'
         ));
     }
 
     public function getName()
     {
-        return 'purchased_land_relation';
+        return 'plot_record_relation';
     }
 
 

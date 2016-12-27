@@ -56,4 +56,14 @@ class NrbHomeManager
         return $dagNumber->getId();
 
     }
+
+
+
+    public function createPlotRecord($plotRecord){
+
+        //var_dump($formData);die;
+        $this->em->persist($plotRecord);
+
+        $this->em->flush();
+    }
 }

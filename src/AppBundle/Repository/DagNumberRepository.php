@@ -21,4 +21,15 @@ class DagNumberRepository extends EntityRepository
         return $qb->getQuery()->getResult();
     }
 
+    public function getDagNumbersByMouzaWithPlr($mouza){
+//        var_dump($mouza);die;
+        $qb = $this->createQueryBuilder('d');
+        $qb->Join('d.purchasedLandRelations', 'plr');
+        $qb ->distinct('d.id');
+        $qb->where('d.mouza = :mouza');
+        $qb->setParameter('mouza',$mouza);
+
+        return $qb->getQuery()->getResult();
+    }
+
 }

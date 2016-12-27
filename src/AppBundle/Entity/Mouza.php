@@ -24,6 +24,11 @@ class Mouza
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\DagNumber", mappedBy="mouza")
      */
     private $dagNumbers;
+    /**
+     * @var PurchasedLandRelation[]
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\PurchasedLandRelation", mappedBy="mouza")
+     */
+    private $purchasedLandRelations;
 
     /**
      * @var integer
@@ -175,6 +180,22 @@ class Mouza
     public function setDeleted($deleted)
     {
         $this->deleted = $deleted;
+    }
+
+    /**
+     * @return DagNumber[]
+     */
+    public function getPurchasedLandRelations()
+    {
+        return $this->purchasedLandRelations;
+    }
+
+    /**
+     * @param DagNumber[] $purchasedLandRelations
+     */
+    public function setPurchasedLandRelations($purchasedLandRelations)
+    {
+        $this->purchasedLandRelations = $purchasedLandRelations;
     }
 
 }

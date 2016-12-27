@@ -59,4 +59,20 @@ class DagNumberController extends Controller
         return $response;
     }
 
+    public function getDagNumberByMouzaIdAction(Mouza $mouza){
+//var_dump('ok');die;
+        $dagNumbers = $this->getDoctrine()->getRepository('AppBundle:DagNumber')->getDagNumbersByMouzaWithPlr($mouza);
+        $data = array();
+
+        foreach ($dagNumbers as $dagNumber) {
+//            $selectedDagNumber = ($dagNumber->getId()==$dagId)?'selected="selected"':"";
+            $data [] = '<option value="' . $dagNumber->getId() . '">' . $dagNumber->getDagNumberName() . '</option>';
+        }
+
+        $response = new Response(json_encode($data));
+        $response->headers->set('Content-Type', 'application/json');
+
+        return $response;
+    }
+
 }

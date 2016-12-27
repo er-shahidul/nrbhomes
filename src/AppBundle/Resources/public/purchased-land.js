@@ -111,6 +111,7 @@ $(function() {
 
 
     $('#purchased_land').on('change','.dag_number_list',function () {
+        removeDuplicateRecord();
         $('#record-list-dag').find('tr').removeClass('active_record');
         var dag_number_id = $(this).val();
         var active_tr = $(this).closest('tr');
@@ -210,6 +211,26 @@ $(function() {
                 elm.closest('tr').find('.dag_number_list').append($msg[i]);
             }
             elm.closest('tr').find('.dag_number_list').append('<option value="-1">Not Listed/Make Own Dag Number</option>');
+        });
+    }
+
+    function removeDuplicateRecord(){
+        var el = {};
+        $("#table-dag tr").each(function() {
+            // get row
+            var row = $(this);
+            // get first and second td
+            var first = row.find('td').find('.mouza_list').val();
+            var second = row.find('td').find('.dag_number_list').val();
+            console.log(first);
+            // if exists, remove the tr
+            if(el[first + second]) {
+                $(this).remove()
+            }
+            else {
+                // if it does not exist, add it with some random val
+                el[first + second] = 1;
+            }
         });
     }
 });

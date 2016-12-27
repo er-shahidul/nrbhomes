@@ -3,30 +3,27 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Document;
+use AppBundle\Entity\PlotRecord;
 use AppBundle\Entity\PurchasedLand;
 use AppBundle\Entity\PurchasedLandRelation;
+use AppBundle\Form\PlotRecordType;
 use AppBundle\Form\PurchasedLandType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
-class PurchasedLandController extends Controller
+class PlotRecordController extends Controller
 {
     public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
         $purchasedLands = $em->getRepository('AppBundle:PurchasedLand')->getPurchasedLandList();
-        //var_dump($purchasedLands);die;
-        /*$em    = $this->get('doctrine.orm.entity_manager');
-        $dql   = "SELECT a FROM AppBundle:PurchasedLand a";
-        $query = $em->createQuery($dql)->getArrayResult();*/
-
         $paginator  = $this->get('knp_paginator');
         $paginations = $paginator->paginate(
             $purchasedLands, /* query NOT result */
             $request->query->getInt('page', 1)/*page number*/,
-            100/*limit per page*/
+            10/*limit per page*/
         );
         //var_dump(count($paginations));
         return $this->render('AppBundle:Purchasedland:index.html.twig', array(
@@ -34,26 +31,26 @@ class PurchasedLandController extends Controller
         ));
     }
 
-    public function createPurchasedLandAction(Request $request )
+    public function createPlotRecordAction(Request $request )
     {
 
-        $purchasedLand = new PurchasedLand();
+        $plotRecord = new PlotRecord();
         //var_dump('ok');die;
-        $form = $this->createForm(PurchasedLandType::class, $purchasedLand);
+        $form = $this->createForm(PlotRecordType::class, $plotRecord);
 
         if ($request->isMethod('POST')) {
 
             $form->handleRequest($request);
             if ($form->isValid()) {
-                $formData['meta_data'] = $request->request->get('meta_data');
-                $formData['files'] = $request->files->all();
-                $this->get('app_bundle.service.nrbhome_manager')->createPurchasedLand($purchasedLand, $formData);
-                return $this->redirect($this->generateUrl('purchased_land_list'));
+                /*$formData['meta_data'] = $request->request->get('meta_data');
+                $formData['files'] = $request->files->all();*/
+                $this->get('app_bundle.service.nrbhome_manager')->createPlotRecord($plotRecord);
+                //return $this->redirect($this->generateUrl('purchased_land_list'));
             }
         }
         $data['form'] = $form->createView();
-        $data['form_action'] = $this->generateUrl('purchased_land_add');
-        return $this->render('AppBundle:Purchasedland:add.html.twig',$data);
+        $data['form_action'] = $this->generateUrl('plot_record_add');
+        return $this->render('AppBundle:PlotRecord:add.html.twig',$data);
 
     }
 

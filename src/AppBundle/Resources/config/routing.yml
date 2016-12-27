@@ -36,6 +36,13 @@ get_dagnumber_by_mouza:
     options:
            expose: true
 
+get_dagnumber_mouza_id:
+    path:     /plot-mouza/{id}
+    defaults: { _controller: AppBundle:DagNumber:getDagNumberByMouzaId}
+    methods: [GET]
+    options:
+           expose: true
+
 dag_number_add:
     path:     /dagnumber/{mouzaId}/add
     defaults:
@@ -50,3 +57,7 @@ document_delete:
     defaults: { _controller: AppBundle:PurchasedLand:documentDelete }
     options:
             expose: true
+
+plot_record_add:
+    path:     /plot-record-add
+    defaults: { _controller: AppBundle:PlotRecord:createPlotRecord }

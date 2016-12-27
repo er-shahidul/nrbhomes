@@ -14,12 +14,6 @@ class DagNumber
 {
 
     /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Mouza", inversedBy="dagNumbers")
-     * @ORM\JoinColumn(name="mouza_id", referencedColumnName="id")
-     */
-    private $mouza;
-
-    /**
      * @var integer
      *
      * @ORM\Column(name="id", type="integer")
@@ -27,6 +21,18 @@ class DagNumber
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Mouza", inversedBy="dagNumbers")
+     * @ORM\JoinColumn(name="mouza_id", referencedColumnName="id")
+     */
+    private $mouza;
+
+    /**
+     * @var PurchasedLandRelation[]
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\PurchasedLandRelation", mappedBy="dagNumber")
+     */
+    private $purchasedLandRelations;
 
     /**
      * @var string
@@ -125,6 +131,22 @@ class DagNumber
     public function setApproved($approved)
     {
         $this->approved = $approved;
+    }
+
+    /**
+     * @return PurchasedLandRelation[]
+     */
+    public function getPurchasedLandRelations()
+    {
+        return $this->purchasedLandRelations;
+    }
+
+    /**
+     * @param PurchasedLandRelation[] $purchasedLandRelations
+     */
+    public function setPurchasedLandRelations($purchasedLandRelations)
+    {
+        $this->purchasedLandRelations = $purchasedLandRelations;
     }
 
 

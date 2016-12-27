@@ -19,7 +19,7 @@ class PurchasedLandRelation
      */
     private $purchasedLand;
     /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Mouza")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Mouza", inversedBy="purchasedLandRelations")
      * @ORM\JoinColumn(name="mouza_id", referencedColumnName="id")
      */
     private $mouza;
