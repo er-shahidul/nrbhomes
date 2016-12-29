@@ -24,7 +24,7 @@ class PurchasedLandRelation
      */
     private $mouza;
     /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\DagNumber")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\DagNumber", inversedBy="purchasedLandRelations")
      * @ORM\JoinColumn(name="dag_number_id", referencedColumnName="id")
      */
     private $dagNumber;

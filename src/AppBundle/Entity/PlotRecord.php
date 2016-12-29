@@ -34,9 +34,15 @@ class PlotRecord
     private $plotRecordRelation;
 
     /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Document", mappedBy="plotRecord", cascade={"persist", "remove"})
+     * @ORM\OrderBy({"id" = "ASC"})
+     */
+    private $documents;
+
+    /**
      * @var string
      *
-     * @ORM\Column(name="plot_name", type="string", length=150 , nullable=true)
+     * @ORM\Column(name="plot_name", type="string", length=150, nullable=true)
      */
     private $plotName;
 
@@ -96,6 +102,22 @@ class PlotRecord
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDocuments()
+    {
+        return $this->documents;
+    }
+
+    /**
+     * @param mixed $documents
+     */
+    public function setDocuments($documents)
+    {
+        $this->documents = $documents;
     }
 
     /**

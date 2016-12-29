@@ -61,6 +61,7 @@ $(function() {
 
             var newWidget = jQuery('#table-dag').attr('data-prototype').replace(/__name__/g, dagCount);
             dagCount++;
+            console.log(dagCount);
             jQuery('<tr></tr>').html(newWidget).appendTo($('#record-list-dag'));
         }
 
@@ -222,9 +223,10 @@ $(function() {
             // get first and second td
             var first = row.find('td').find('.mouza_list').val();
             var second = row.find('td').find('.dag_number_list').val();
-            console.log(first);
             // if exists, remove the tr
             if(el[first + second]) {
+
+                alert('This row value is duplicate. So this row has been removed.');
                 $(this).remove()
             }
             else {

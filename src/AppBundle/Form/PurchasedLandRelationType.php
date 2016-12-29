@@ -43,7 +43,6 @@ class PurchasedLandRelationType extends AbstractType
                         $qb = $er->createQueryBuilder('m')->where('m.approved=1')->orderBy('m.name', 'asc');
                         return $qb;
                     },
-                    'required'=>false
                 )
             )
         ;

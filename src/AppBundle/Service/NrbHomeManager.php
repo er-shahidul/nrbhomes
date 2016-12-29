@@ -59,11 +59,24 @@ class NrbHomeManager
 
 
 
-    public function createPlotRecord($plotRecord){
+    public function createPlotRecord($plotRecord, $formData){
 
         //var_dump($formData);die;
         $this->em->persist($plotRecord);
+        if(isset($formData['files']['doc_file'])){
 
+            $files = $formData['files']['doc_file'];
+            $meta_data = $formData['meta_data'];
+            foreach($files as $key=>$img){
+                $documents = new Document();
+                $fileName = $img->getClientOriginalName();
+                $img->move($documents->getUploadDir(), $fileName);
+                $documents->setPlotRecord($plotRecord);
+                $documents->setAttachment($fileName);
+                $documents->setMetaData($meta_data[$key]);
+                $this->em->persist($documents);
+            }
+        }
         $this->em->flush();
     }
 }

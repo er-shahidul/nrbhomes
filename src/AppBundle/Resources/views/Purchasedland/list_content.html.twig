@@ -16,7 +16,7 @@
                 <td>{{ land[0]['id'] }}</td>
                 <td>{{ land[0]['landOwnerName'] }}</td>
                 <td>{{ land[0]['address'] }}</td>
-                <td>{{ land[0]['landType'] }}</td>
+                <td>{{ land[0]['landType']|capitalize }}</td>
                 <td>{{ land['totalArea'] }}</td>
                 <td>
                     <a class="btn blue btn-sm" href="{{ path('purchased_land_update', {id: land[0]['id']}) }}"><i class="fa fa-edit"></i></a>

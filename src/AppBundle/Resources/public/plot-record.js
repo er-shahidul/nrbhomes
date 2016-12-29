@@ -30,24 +30,6 @@ $(function() {
             }
         });
 
-        $("#add_more_owner").click(function(){
-            $(".owner_info_panel").children().clone().appendTo(".add_owner_info_panel");
-            $('.add_owner_info_panel .owner_panel_remove').removeClass('hidden');
-        });
-
-        $('.add_owner_info_panel').on('click','.owner_panel_remove',function(){
-            $(this).parent().parent().remove();
-        });
-
-        $("#add_more_plot").click(function(){
-            $(".plot_info_panel").children().clone().appendTo(".add_plot_info_panel");
-            $('.add_plot_info_panel .plot_panel_remove').removeClass('hidden');
-        });
-
-        $('.add_plot_info_panel').on('click','.plot_panel_remove',function(){
-            $(this).parent().parent().remove();
-        });
-
         $('#add-dag').click(function (e) {
             e.preventDefault();
             addDag();
@@ -84,14 +66,18 @@ $(function() {
     }).change();
 
 
-  /*  new SFileInput('doc_file',{
+    $('#plot_record').on('change','.dag_number_list',function () {
+        removeDuplicateRecord();
+    }).change();
+
+    new SFileInput('doc_file',{
         button:'fileinput-new',
         allowedType:'image',
         selectedFileLabel:'selected_doc_file1',
         multipleFile:true,
         selectedFileClass:'selectedFileClass'
     });
-*/
+
     $('.remove_document').on('click', function(e){
         e.preventDefault();
         var elm= $(this);
@@ -125,6 +111,28 @@ $(function() {
                 elm.closest('tr').find('.dag_number_list').append($msg[i]);
             }
             //elm.closest('tr').find('.dag_number_list').append('<option value="-1">Not Listed/Make Own Dag Number</option>');
+        });
+    }
+
+
+    function removeDuplicateRecord(){
+        var el = {};
+        $("#table-dag tr").each(function() {
+            // get row
+            var row = $(this);
+            // get first and second td
+            var first = row.find('td').find('.mouza_list').val();
+            var second = row.find('td').find('.dag_number_list').val();
+            // if exists, remove the tr
+            if(el[first + second]) {
+
+                alert('This row value is duplicate. So this row has been removed.');
+                $(this).remove()
+            }
+            else {
+                // if it does not exist, add it with some random val
+                el[first + second] = 1;
+            }
         });
     }
 });

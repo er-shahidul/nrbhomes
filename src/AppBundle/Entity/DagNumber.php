@@ -35,6 +35,12 @@ class DagNumber
     private $purchasedLandRelations;
 
     /**
+     * @var PlotRecordRelation[]
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\PlotRecordRelation", mappedBy="dagNumber")
+     */
+    private $plotRecordRelations;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="dag_number_name", type="string", length=255, nullable=true)
@@ -147,6 +153,22 @@ class DagNumber
     public function setPurchasedLandRelations($purchasedLandRelations)
     {
         $this->purchasedLandRelations = $purchasedLandRelations;
+    }
+
+    /**
+     * @return PlotRecordRelation[]
+     */
+    public function getPlotRecordRelations()
+    {
+        return $this->plotRecordRelations;
+    }
+
+    /**
+     * @param PlotRecordRelation[] $plotRecordRelations
+     */
+    public function setPlotRecordRelations($plotRecordRelations)
+    {
+        $this->plotRecordRelations = $plotRecordRelations;
     }
 
 

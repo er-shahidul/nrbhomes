@@ -35,9 +35,10 @@ class PurchasedLandType extends AbstractType
                 'attr' => array('class' => 'form-control'),
                 'required'=>false
             ))
-            ->add('landType', TextType::class,array(
-                'attr' => array('class' => 'form-control'),
-                'required'=>false,
+            ->add('landType', ChoiceType::class, array(
+                'attr' => array('class' => 'form-control select2'),
+                'choices'  => array('Govt' => 'GOVT', 'Private' => 'PRIVATE'),
+                'placeholder' => 'Select',
             ))
             ->add('purchasedLandRelation', CollectionType::class, array(
                 'entry_type' => PurchasedLandRelationType::class,

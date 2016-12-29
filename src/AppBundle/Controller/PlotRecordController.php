@@ -18,16 +18,16 @@ class PlotRecordController extends Controller
     public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
-        $purchasedLands = $em->getRepository('AppBundle:PurchasedLand')->getPurchasedLandList();
+        $plotRecords = $em->getRepository('AppBundle:PlotRecord')->getPlotRecordList();
         $paginator  = $this->get('knp_paginator');
         $paginations = $paginator->paginate(
-            $purchasedLands, /* query NOT result */
+            $plotRecords, /* query NOT result */
             $request->query->getInt('page', 1)/*page number*/,
             10/*limit per page*/
         );
         //var_dump(count($paginations));
-        return $this->render('AppBundle:Purchasedland:index.html.twig', array(
-            'lands'=>$paginations
+        return $this->render('AppBundle:PlotRecord:index.html.twig', array(
+            'plots'=>$paginations
         ));
     }
 
@@ -42,10 +42,10 @@ class PlotRecordController extends Controller
 
             $form->handleRequest($request);
             if ($form->isValid()) {
-                /*$formData['meta_data'] = $request->request->get('meta_data');
-                $formData['files'] = $request->files->all();*/
-                $this->get('app_bundle.service.nrbhome_manager')->createPlotRecord($plotRecord);
-                //return $this->redirect($this->generateUrl('purchased_land_list'));
+                $formData['meta_data'] = $request->request->get('meta_data');
+                $formData['files'] = $request->files->all();
+                $this->get('app_bundle.service.nrbhome_manager')->createPlotRecord($plotRecord, $formData);
+                return $this->redirect($this->generateUrl('plot_record_list'));
             }
         }
         $data['form'] = $form->createView();
@@ -54,27 +54,26 @@ class PlotRecordController extends Controller
 
     }
 
-    public function updatePurchasedLandAction(Request $request, PurchasedLand $purchasedLand )
+    public function updatePlotRecordAction(Request $request, PlotRecord $plotRecord )
     {
 
-        //$purchasedLand = new PurchasedLand();
-        $existDocument = $this->getDoctrine()->getRepository('AppBundle:Document')->findBy(array('purchasedLand'=>$purchasedLand));
-        $form = $this->createForm(PurchasedLandType::class, $purchasedLand);
-
+        $existDocument = $this->getDoctrine()->getRepository('AppBundle:Document')->findBy(array('plotRecord'=>$plotRecord));
+        $form = $this->createForm(PlotRecordType::class, $plotRecord);
+//        var_dump('ok');die;
         if ($request->isMethod('POST')) {
 
             $form->handleRequest($request);
             if ($form->isValid()) {
                 $formData['meta_data'] = $request->request->get('meta_data');
                 $formData['files'] = $request->files->all();
-                $this->get('app_bundle.service.nrbhome_manager')->createPurchasedLand($purchasedLand, $formData);
-                return $this->redirect($this->generateUrl('purchased_land_list'));
+                $this->get('app_bundle.service.nrbhome_manager')->createPlotRecord($plotRecord, $formData);
+                return $this->redirect($this->generateUrl('plot_record_list'));
             }
         }
         $data['documents'] = $existDocument;
         $data['form'] = $form->createView();
-        $data['form_action'] = $this->generateUrl('purchased_land_update',array('id'=>$purchasedLand->getId()));
-        return $this->render('AppBundle:Purchasedland:add.html.twig',$data);
+        $data['form_action'] = $this->generateUrl('plot_record_update',array('id'=>$plotRecord->getId()));
+        return $this->render('AppBundle:PlotRecord:add.html.twig',$data);
 
     }
 

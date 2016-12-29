@@ -23,12 +23,13 @@ class PlotRecordRelation
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\PlotRecord", inversedBy="PlotRecordRelation")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\PlotRecord", inversedBy="plotRecordRelation")
      * @ORM\JoinColumn(name="plot_record_id", referencedColumnName="id")
      */
     private $plotRecord;
+
     /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\DagNumber")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\DagNumber", inversedBy="plotRecordRelations")
      * @ORM\JoinColumn(name="dag_number_id", referencedColumnName="id")
      */
     private $dagNumber;
@@ -94,6 +95,14 @@ class PlotRecordRelation
     public function setDagArea($dagArea)
     {
         $this->dagArea = $dagArea;
+    }
+
+    public function getMouza() {
+        return $this->getDagNumber() == null ? null : $this->getDagNumber()->getMouza();
+    }
+
+    public function setMouza($mouza) {
+        //do nothing
     }
 
 }

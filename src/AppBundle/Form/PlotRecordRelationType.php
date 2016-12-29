@@ -27,7 +27,7 @@ class PlotRecordRelationType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-
+//        var_dump($options);die;
         $builder
             ->add('dagArea',TextType::class)
             ->add('mouza', EntityType::class,
@@ -44,8 +44,7 @@ class PlotRecordRelationType extends AbstractType
                             ->orderBy('m.name', 'asc');
                         return $qb;
                     },
-                    'required'=>false,
-                    'mapped' => false
+//                    'mapped'=>false,
                 )
             )
         ;

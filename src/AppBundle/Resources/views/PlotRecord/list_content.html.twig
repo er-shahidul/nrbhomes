@@ -2,25 +2,25 @@
     <thead>
     <tr class="uppercase">
         <th>{{ 'ID'|trans }}</th>
-        <th>{{ 'Owner Name'|trans }}</th>
+        <th>{{ 'Plot Name'|trans }}</th>
+        <th>{{ 'Plot Number'|trans }}</th>
         <th>{{ 'Owner Address'|trans }}</th>
-        <th>{{ 'Land Type'|trans }}</th>
         <th>{{ 'Total Land'|trans }}<small> {{ '(decimal)'|trans }}</small></th>
         <th width="150px"></th>
     </tr>
     </thead>
     <tbody>
-    {% if lands is not empty %}
-        {% for land in lands %}
+    {% if plots is not empty %}
+        {% for plot in plots %}
             <tr>
-                <td>{{ land[0]['id'] }}</td>
-                <td>{{ land[0]['landOwnerName'] }}</td>
-                <td>{{ land[0]['address'] }}</td>
-                <td>{{ land[0]['landType'] }}</td>
-                <td>{{ land['totalArea'] }}</td>
+                <td>{{ plot[0]['id'] }}</td>
+                <td>{{ plot[0]['plotName'] }}</td>
+                <td>{{ plot[0]['plotNumber'] }}</td>
+                <td>{{ plot[0]['address'] }}</td>
+                <td>{{ plot['totalArea'] }}</td>
                 <td>
-                    <a class="btn blue btn-sm" href="{{ path('purchased_land_update', {id: land[0]['id']}) }}"><i class="fa fa-edit"></i></a>
-                   {# <a class="btn red btn-sm" href="{{ path('land_delete', {id: land.id}) }}"><i class="fa fa-times"></i></a>#}
+                    <a class="btn blue btn-sm" href="{{ path('plot_record_update', {id: plot[0]['id']}) }}"><i class="fa fa-edit"></i></a>
+                   {# <a class="btn red btn-sm" href="{{ path('land_delete', {id: plot.id}) }}"><i class="fa fa-times"></i></a>#}
                 </td>
 
             </tr>
@@ -34,5 +34,5 @@
 </table>
 
 <div class='dataTables_paginate paging_bootstrap pagination'>
-    {{ knp_pagination_render(lands) }}
+    {{ knp_pagination_render(plots) }}
 </div>

@@ -17,14 +17,14 @@ class PlotRecordRepository extends EntityRepository
         $this->_em->flush();
     }
 
-    public function getPurchasedLandList(){
+    public function getPlotRecordList(){
 
-        $qb = $this->_em->getRepository('AppBundle:PurchasedLand')->createQueryBuilder('pl');
-        $qb->select('pl');
-        $qb->addSelect('SUM(plr.purchasedTotalArea) AS totalArea');
-        $qb->join('pl.purchasedLandRelation', 'plr');
-        $qb->groupBy('plr.purchasedLand');
-        $qb->orderBy('pl.id','ASC');
+        $qb = $this->_em->getRepository('AppBundle:PlotRecord')->createQueryBuilder('pr');
+        $qb->select('pr');
+        $qb->addSelect('SUM(prr.dagArea) AS totalArea');
+        $qb->join('pr.plotRecordRelation', 'prr');
+        $qb->groupBy('prr.plotRecord');
+        $qb->orderBy('pr.id','ASC');
         return $qb->getQuery()->getArrayResult();
 
     }

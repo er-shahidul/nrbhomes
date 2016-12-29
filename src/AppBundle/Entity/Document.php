@@ -30,6 +30,12 @@ class Document
     private $purchasedLand;
 
     /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\PlotRecord", inversedBy="documents")
+     * @ORM\JoinColumn(name="plot_record_id", referencedColumnName="id")
+     */
+    private $plotRecord;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="meta_data", type="string", length=150 , nullable=true)
@@ -65,6 +71,22 @@ class Document
     public function setPurchasedLand($purchasedLand)
     {
         $this->purchasedLand = $purchasedLand;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPlotRecord()
+    {
+        return $this->plotRecord;
+    }
+
+    /**
+     * @param mixed $plotRecord
+     */
+    public function setPlotRecord($plotRecord)
+    {
+        $this->plotRecord = $plotRecord;
     }
 
     /**

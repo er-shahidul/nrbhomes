@@ -61,3 +61,11 @@ document_delete:
 plot_record_add:
     path:     /plot-record-add
     defaults: { _controller: AppBundle:PlotRecord:createPlotRecord }
+
+plot_record_update:
+    path:     /plot-record-edit/{id}
+    defaults: { _controller: AppBundle:PlotRecord:updatePlotRecord}
+
+plot_record_list:
+    path:     /plot-record-list
+    defaults: { _controller: AppBundle:PlotRecord:index }

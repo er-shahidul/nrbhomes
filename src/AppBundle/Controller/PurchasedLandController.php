@@ -17,10 +17,6 @@ class PurchasedLandController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $purchasedLands = $em->getRepository('AppBundle:PurchasedLand')->getPurchasedLandList();
-        //var_dump($purchasedLands);die;
-        /*$em    = $this->get('doctrine.orm.entity_manager');
-        $dql   = "SELECT a FROM AppBundle:PurchasedLand a";
-        $query = $em->createQuery($dql)->getArrayResult();*/
 
         $paginator  = $this->get('knp_paginator');
         $paginations = $paginator->paginate(
@@ -28,7 +24,6 @@ class PurchasedLandController extends Controller
             $request->query->getInt('page', 1)/*page number*/,
             100/*limit per page*/
         );
-        //var_dump(count($paginations));
         return $this->render('AppBundle:Purchasedland:index.html.twig', array(
             'lands'=>$paginations
         ));
