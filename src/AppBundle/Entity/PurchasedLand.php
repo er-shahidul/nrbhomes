@@ -33,6 +33,12 @@ class PurchasedLand
      */
     private $purchasedLandRelation;
 
+    /**
+     * @ORM\OneToOne(targetEntity="AppBundle\Entity\LeasedInfo", mappedBy="purchasedLand", cascade={"persist", "remove"}, orphanRemoval=true)
+     * @ORM\OrderBy({"id" = "ASC"})
+     */
+    private $leasedInfo;
+
 
     /**
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Document", mappedBy="purchasedLand", cascade={"persist", "remove"})
@@ -71,9 +77,30 @@ class PurchasedLand
     /**
      * @var string
      *
-     * @ORM\Column(name="land_type", type="string", length=150 , nullable=true)
+     * @ORM\Column(name="land_type", type="string", length=150, columnDefinition="ENUM('PRIVATE', 'DEMESNE', 'VESTED')", nullable=true)
      */
-    private $landType;
+    protected $landType;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="ownership_type", type="string", length=150, columnDefinition="ENUM('HEREDITARY', 'PURCHASE', 'ALLOTMENT')", nullable=true)
+     */
+    protected $ownershipType;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="purchased_property", type="string", length=150, columnDefinition="ENUM('REGISTERED', 'TENDER', 'ATTORNEY')", nullable=true)
+     */
+    protected $purchasedProperty;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="paid_method", type="string", length=150, columnDefinition="ENUM('ONETIME', 'INSTALLMENT')", nullable=true)
+     */
+    protected $paidMethod;
 
     /**
      * @var string
@@ -82,8 +109,23 @@ class PurchasedLand
      */
     private $status;
 
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="leased", type="boolean")
+     */
+    private $leased;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="purchased", type="boolean")
+     */
+    private $purchased;
 
     public function __construct() {
+        $this->setLeased(false);
+        $this->setPurchased(false);
         $this->purchasedLandRelation = new ArrayCollection();
     }
 
@@ -134,6 +176,25 @@ class PurchasedLand
     public function setDocuments($documents)
     {
         $this->documents = $documents;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLeasedInfo()
+    {
+        return $this->leasedInfo;
+    }
+
+    /**
+     * @param mixed $leasedInfo
+     * @return $this
+     */
+    public function setLeasedInfo($leasedInfo)
+    {
+        $leasedInfo->setPurchasedLand($this);
+        $this->leasedInfo = $this->isLeased()?$leasedInfo:null;
+        return $this;
     }
 
     /**
@@ -264,5 +325,90 @@ class PurchasedLand
     {
         return $this->status;
     }
+
+    /**
+     * @return boolean
+     */
+    public function isLeased()
+    {
+        return $this->leased;
+    }
+
+    /**
+     * @param boolean $leased
+     */
+    public function setLeased($leased)
+    {
+        $this->leased = $leased;
+        if (!$leased) {
+            $this->leasedInfo = null;
+        }
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isPurchased()
+    {
+        return $this->purchased;
+    }
+
+    /**
+     * @param boolean $purchased
+     */
+    public function setPurchased($purchased)
+    {
+        $this->purchased = $purchased;
+    }
+
+    /**
+     * @return string
+     */
+    public function getOwnershipType()
+    {
+        return $this->ownershipType;
+    }
+
+    /**
+     * @param string $ownershipType
+     */
+    public function setOwnershipType($ownershipType)
+    {
+        $this->ownershipType = $ownershipType;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPurchasedProperty()
+    {
+        return $this->purchasedProperty;
+    }
+
+    /**
+     * @param string $purchasedProperty
+     */
+    public function setPurchasedProperty($purchasedProperty)
+    {
+        $this->purchasedProperty = $purchasedProperty;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPaidMethod()
+    {
+        return $this->paidMethod;
+    }
+
+    /**
+     * @param string $paidMethod
+     */
+    public function setPaidMethod($paidMethod)
+    {
+        $this->paidMethod = $paidMethod;
+    }
+
+
 }
 

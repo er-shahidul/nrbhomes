@@ -32,20 +32,90 @@
                     <div class="portlet-body">
 
                         <div class="form-body">
+
                             <div class="form-group">
-                                <label class="col-md-3 control-label">{{ 'Land owner name'|trans }}</label>
+                                <label class="col-md-3 control-label">{{ 'Land Type'|trans }}</label>
                                 <div class="col-md-4">
-                                    {{ form_widget(form.landOwnerName) }}
+                                    {{ form_widget(form.landType) }}
                                     <span class="help-block"></span>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label class="col-md-3 control-label">{{ 'Land owner address'|trans }}</label>
-                                <div class="col-md-4">
-                                    {{ form_widget(form.address) }}
-                                    <span class="help-block"></span>
+
+                            <div class="purchased_section">
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label">{{ 'Purchased'|trans }}</label>
+                                    <div class="col-md-4">
+                                        {{ form_widget(form.purchased, {'attr': {'class': 'isPurchased'}}) }}
+                                        {{ form_errors(form.purchased) }}
+                                        <span class="help-block"></span>
+                                    </div>
+                                </div>
+                                <div class="is_purchased" style="display: none">
+                                    <div class="form-group">
+                                        <label class="col-md-3 control-label">{{ 'Land owner name'|trans }}</label>
+                                        <div class="col-md-4">
+                                            {{ form_widget(form.landOwnerName) }}
+                                            <span class="help-block"></span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-3 control-label">{{ 'Land owner address'|trans }}</label>
+                                        <div class="col-md-4">
+                                            {{ form_widget(form.address) }}
+                                            <span class="help-block"></span>
+                                        </div>
+                                    </div>
+
                                 </div>
                             </div>
+                            <div class="govt_section" style="display: none">
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label">{{ 'Leased'|trans }}</label>
+                                    <div class="col-md-4">
+                                        {{ form_widget(form.leased, {'attr': {'class': 'isLeased'}}) }}
+                                        {{ form_errors(form.leased) }}
+                                        <span class="help-block"></span>
+                                    </div>
+                                </div>
+                                <div class="is_leased" style="display: none">
+                                    <div class="form-group">
+                                        <label class="col-md-3 control-label">{{ 'Deed Number'|trans }}</label>
+                                        <div class="col-md-4">
+                                            {{ form_widget(form.leasedInfo.deedNumber) }}
+                                            {{ form_errors(form.leasedInfo.deedNumber) }}
+                                            <span class="help-block"></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-md-3 control-label">{{ 'Deed Date'|trans }}</label>
+                                        <div class="col-md-4">
+                                            {{ form_widget(form.leasedInfo.deedDate) }}
+                                            {{ form_errors(form.leasedInfo.deedDate) }}
+                                            <span class="help-block"></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-md-3 control-label">{{ 'Duration'|trans }}</label>
+                                        <div class="col-md-4">
+                                            {{ form_widget(form.leasedInfo.deedDuration) }}
+                                            {{ form_errors(form.leasedInfo.deedDuration) }}
+                                            <span class="help-block"></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-md-3 control-label">{{ 'Lease Start Date'|trans }}</label>
+                                        <div class="col-md-4">
+                                            {{ form_widget(form.leasedInfo.leaseStartDate) }}
+                                            {{ form_errors(form.leasedInfo.leaseStartDate) }}
+                                            <span class="help-block"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
 
                             <div class="form-group">
                                 <label class="col-md-3 control-label">{{ 'Total Amount'|trans }}</label>
@@ -59,14 +129,6 @@
                                 <label class="col-md-3 control-label">{{ 'Paid Amount'|trans }}</label>
                                 <div class="col-md-4">
                                     {{ form_widget(form.paidAmount) }}
-                                    <span class="help-block"></span>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label class="col-md-3 control-label">{{ 'Land Type'|trans }}</label>
-                                <div class="col-md-4">
-                                    {{ form_widget(form.landType) }}
                                     <span class="help-block"></span>
                                 </div>
                             </div>

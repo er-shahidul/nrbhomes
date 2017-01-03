@@ -111,11 +111,9 @@ class Profile
     protected $telephone;
 
     /**
-     * @var array $type
-     * Values (
-    'Male', 'Female', 'Other'
-     * )
-     * @ORM\Column(name="gender", type="string", length=255, nullable=true)
+     * @var string
+     *
+     * @ORM\Column(name="gender", type="string", length=255, columnDefinition="ENUM('Male', 'Female', 'Other')", nullable=true)
      */
     protected $gender;
 

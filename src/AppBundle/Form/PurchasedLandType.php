@@ -26,7 +26,8 @@ class PurchasedLandType extends AbstractType
                 'attr' => array('class' => 'form-control')
             ))
             ->add('address',TextareaType::class ,array(
-                'attr' => array('class' => 'form-control')
+                'attr' => array('class' => 'form-control'),
+                'required'=>false
             ))
             ->add('totalAmount', TextType::class,array(
                 'attr' => array('class' => 'form-control')
@@ -36,10 +37,24 @@ class PurchasedLandType extends AbstractType
                 'required'=>false
             ))
             ->add('landType', ChoiceType::class, array(
-                'attr' => array('class' => 'form-control select2'),
-                'choices'  => array('Govt' => 'GOVT', 'Private' => 'PRIVATE'),
-                'placeholder' => 'Select',
+                'attr' => array('class' => 'form-control select2 land_type'),
+                'choices'  => array( 'Private Property' => 'PRIVATE', 'Demesne' => 'DEMESNE', 'Vested Property' => 'VESTED'),
+//                'placeholder' => 'Select',
             ))
+
+            ->add('leased', ChoiceType::class, array(
+                'choices' => array('Yes' => 1, 'No' => 0),
+                'expanded' => true,
+                'multiple' => false
+            ))
+
+            ->add('purchased', ChoiceType::class, array(
+                'choices' => array('Yes' => 1, 'No' => 0),
+                'expanded' => true,
+                'multiple' => false
+            ))
+            ->add('leasedInfo', LeasedInfoType::class)
+
             ->add('purchasedLandRelation', CollectionType::class, array(
                 'entry_type' => PurchasedLandRelationType::class,
                 'allow_add' => true,
@@ -52,7 +67,6 @@ class PurchasedLandType extends AbstractType
                 )
             ))
             ;
-
     }
 
     /**

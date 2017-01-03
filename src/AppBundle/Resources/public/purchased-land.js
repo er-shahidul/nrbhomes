@@ -8,7 +8,13 @@ $(function() {
             focusInvalid: false, // do not focus the last invalid input
             ignore: "",  // validate all fields including form hidden input
             rules:{
-                'purchased_land[landOwnerName]':"required",
+               'purchased_land[landOwnerName]':{
+                    required: {
+                            depends: function (element) {
+                                return isPurchased();
+                            }
+                        }
+                },
                 'purchased_land[paidAmount]': {
                     lessThan: '#purchased_land_totalAmount'
                 }
@@ -61,10 +67,52 @@ $(function() {
 
             var newWidget = jQuery('#table-dag').attr('data-prototype').replace(/__name__/g, dagCount);
             dagCount++;
-            console.log(dagCount);
             jQuery('<tr></tr>').html(newWidget).appendTo($('#record-list-dag'));
         }
 
+
+        $('.land_type').on('change',function () {
+
+            var elm = $(this);
+            var id = $(this).val();
+            if(id=='PRIVATE'){
+                jQuery('.govt_section').hide();
+                jQuery('.purchased_section').show();
+            }else{
+                jQuery('.purchased_section').hide();
+                jQuery('.govt_section').show();
+            }
+
+        }).change();
+
+        jQuery(".isPurchased input[type='radio']").on('click', function(){
+
+            var isPurchased= jQuery(".isPurchased input[type='radio']:checked").val();
+            if(isPurchased==1){
+                jQuery('.is_purchased').show();
+            }else{
+                jQuery('.is_purchased').hide();
+            }
+        });
+
+        var isLeased= jQuery(".isLeased input[type='radio']:checked").val();
+        if(isLeased==1){
+            jQuery('.is_leased').show();
+        }
+        jQuery(".isLeased input[type='radio']").on('click', function(){
+
+            var isLeased= jQuery(".isLeased input[type='radio']:checked").val();
+            if(isLeased==1){
+                jQuery('.is_leased').show();
+            }else{
+                jQuery('.is_leased').hide();
+            }
+        });
+
+        function isPurchased()
+        {
+            return jQuery(".isPurchased input[type='radio']:checked").val() == 1;
+        }
 
     }
 

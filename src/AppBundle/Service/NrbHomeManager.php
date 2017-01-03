@@ -20,6 +20,7 @@ class NrbHomeManager
     public function createPurchasedLand($purchasedLand, $formData){
 
         //var_dump($formData);die;
+//        var_dump($purchasedLand);die;
         $this->em->persist($purchasedLand);
 
         if(isset($formData['files']['doc_file'])){
