@@ -84,7 +84,7 @@ class PurchasedLand
     /**
      * @var string
      *
-     * @ORM\Column(name="ownership_type", type="string", length=150, columnDefinition="ENUM('HEREDITARY', 'PURCHASE', 'ALLOTMENT')", nullable=true)
+     * @ORM\Column(name="ownership_type", type="string", length=150, columnDefinition="ENUM('HEREDITARY', 'PURCHASE', 'ALLOTMENT', 'WILL', 'ILLEGAL')", nullable=true)
      */
     protected $ownershipType;
 

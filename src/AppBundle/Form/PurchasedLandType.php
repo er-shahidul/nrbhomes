@@ -38,8 +38,38 @@ class PurchasedLandType extends AbstractType
             ))
             ->add('landType', ChoiceType::class, array(
                 'attr' => array('class' => 'form-control select2 land_type'),
-                'choices'  => array( 'Private Property' => 'PRIVATE', 'Demesne' => 'DEMESNE', 'Vested Property' => 'VESTED'),
+                'choices'  => array( 'Private Land' => 'PRIVATE', 'Demesne Land' => 'DEMESNE', 'Vested Property' => 'VESTED'),
 //                'placeholder' => 'Select',
+            ))
+            ->add('ownershipType', ChoiceType::class, array(
+                'attr' => array('class' => 'form-control select2'),
+                'choices'  => array(
+                    'Purchase' => 'PURCHASE',
+                    'Hereditary' => 'HEREDITARY',
+                    'Allotment Paper' => 'ALLOTMENT',
+                    'Owned by Will' => 'WILL',
+                    'Illegal Possession' => 'ILLEGAL'
+                )
+            ))
+            ->add('purchasedProperty', ChoiceType::class, array(
+                'attr' => array('class' => 'form-control select2'),
+                'choices'  => array(
+                    'Registered' => 'REGISTERED',
+                    'Tender Money Paid' => 'TENDER',
+                    'Power of Attorney' => 'ATTORNEY'
+                ),
+                'placeholder' => 'Select',
+                'required'=>false
+            ))
+
+            ->add('paidMethod', ChoiceType::class, array(
+                'attr' => array('class' => 'form-control select2'),
+                'choices'  => array(
+                    'Onetime Payment' => 'ONETIME',
+                    'Installment Payment' => 'INSTALLMENT'
+                ),
+                'placeholder' => 'Select',
+                'required'=>false
             ))
 
             ->add('leased', ChoiceType::class, array(

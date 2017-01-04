@@ -130,7 +130,7 @@ class LeasedInfo
     }
 
     /**
-     * @return string
+     * @return \DateTime
      */
     public function getDeedDate()
     {
@@ -138,7 +138,7 @@ class LeasedInfo
     }
 
     /**
-     * @param string $deedDate
+     * @param \DateTime $deedDate
      */
     public function setDeedDate($deedDate)
     {
@@ -162,7 +162,7 @@ class LeasedInfo
     }
 
     /**
-     * @return string
+     * @return \DateTime
      */
     public function getLeaseStartDate()
     {
@@ -170,7 +170,7 @@ class LeasedInfo
     }
 
     /**
-     * @param string $leaseStartDate
+     * @param \DateTime $leaseStartDate
      */
     public function setLeaseStartDate($leaseStartDate)
     {

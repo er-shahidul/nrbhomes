@@ -31,6 +31,7 @@ $(function() {
             },
 
             submitHandler: function (form) {
+                spacipicSectionReset();
                 form.submit();
             }
         });
@@ -85,6 +86,10 @@ $(function() {
 
         }).change();
 
+        var isPurchasedCheck = jQuery(".isPurchased input[type='radio']:checked").val();
+        if(isPurchasedCheck==1){
+            jQuery('.is_purchased').show();
+        }
         jQuery(".isPurchased input[type='radio']").on('click', function(){
 
             var isPurchased= jQuery(".isPurchased input[type='radio']:checked").val();
@@ -100,7 +105,6 @@ $(function() {
             jQuery('.is_leased').show();
         }
         jQuery(".isLeased input[type='radio']").on('click', function(){
-
             var isLeased= jQuery(".isLeased input[type='radio']:checked").val();
             if(isLeased==1){
                 jQuery('.is_leased').show();
@@ -112,6 +116,26 @@ $(function() {
         function isPurchased()
         {
             return jQuery(".isPurchased input[type='radio']:checked").val() == 1;
+        }
+
+    }
+
+    jQuery('#purchased_land_leasedInfo_deedDate').datepicker({
+        dateFormat: 'yy-mm-dd'
+    });
+
+    jQuery('#purchased_land_leasedInfo_leaseStartDate').datepicker({
+        dateFormat: 'yy-mm-dd'
+    });
+
+    function spacipicSectionReset(){
+        var land_type = jQuery('#purchased_land_landType option:selected').val();
+        if(land_type=="PRIVATE"){
+            jQuery('.govt_section').find('input[type=text]').val('');
+            jQuery(".isLeased input[type='radio']").val(0)
+        }else{
+            jQuery(".isPurchased input[type='radio']").val(0);
+            jQuery('.purchased_section').find('input[type=text], textarea').val('');
         }
 
     }

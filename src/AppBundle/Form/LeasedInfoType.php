@@ -2,11 +2,8 @@
 namespace AppBundle\Form;
 
 
-use AppBundle\Entity\PurchasedLandRelation;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\CollectionType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -26,16 +23,20 @@ class LeasedInfoType extends AbstractType
                 'attr' => array('class' => 'form-control'),
                 'required'=>false
             ))
-            ->add('deedDate',TextType::class ,array(
+            ->add('deedDate',DateType::class ,array(
                 'attr' => array('class' => 'form-control'),
-                'required'=>false
+                'required'=>false,
+                'widget'=>'single_text',
+                'format'=>'yyyy-MM-dd'
             ))
             ->add('deedDuration', TextType::class,array(
                 'attr' => array('class' => 'form-control'),
                 'required'=>false
             ))
-            ->add('leaseStartDate', TextType::class,array(
+            ->add('leaseStartDate', DateType::class,array(
                 'attr' => array('class' => 'form-control'),
+                'widget'=>'single_text',
+                'format'=>'yyyy-MM-dd',
                 'required'=>false
             ))
             ;
