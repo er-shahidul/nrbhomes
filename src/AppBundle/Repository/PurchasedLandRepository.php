@@ -2,6 +2,7 @@
 
 namespace AppBundle\Repository;
 
+use AppBundle\Traits\QueryAssistant;
 use Doctrine\ORM\EntityRepository;
 /**
  * PurchasedLandRepository
@@ -11,20 +12,25 @@ use Doctrine\ORM\EntityRepository;
  */
 class PurchasedLandRepository extends EntityRepository
 {
+    use QueryAssistant;
+
     public function create($data)
     {
         $this->_em->persist($data);
         $this->_em->flush();
     }
 
-    public function getPurchasedLandList(){
-
+    public function getPurchasedLandList($data){
+        $params = $this->queryParameters($data);
         $qb = $this->_em->getRepository('AppBundle:PurchasedLand')->createQueryBuilder('pl');
         $qb->select('pl');
         $qb->addSelect('SUM(plr.purchasedTotalArea) AS totalArea');
         $qb->join('pl.purchasedLandRelation', 'plr');
         $qb->groupBy('plr.purchasedLand');
         $qb->orderBy('pl.id','ASC');
+
+        $this->filterQuery($qb, $params['arrFilterField']);
+
         return $qb->getQuery()->getArrayResult();
 
     }

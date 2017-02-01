@@ -2,6 +2,7 @@
 
 namespace AppBundle\Repository;
 
+use AppBundle\Traits\QueryAssistant;
 use Doctrine\ORM\EntityRepository;
 /**
  * PlotRecordRepository
@@ -11,22 +12,48 @@ use Doctrine\ORM\EntityRepository;
  */
 class PlotRecordRepository extends EntityRepository
 {
+    use QueryAssistant;
+
     public function create($data)
     {
         $this->_em->persist($data);
         $this->_em->flush();
     }
 
-    public function getPlotRecordList(){
-
+    public function getPlotRecordList($data){
+        //var_dump($data);
+        $params = $this->queryParameters($data);
         $qb = $this->_em->getRepository('AppBundle:PlotRecord')->createQueryBuilder('pr');
-        $qb->select('pr');
+//        $qb->select('pr');
         $qb->addSelect('SUM(prr.dagArea) AS totalArea');
         $qb->join('pr.plotRecordRelation', 'prr');
+        $qb->join('prr.dagNumber', 'd');
         $qb->groupBy('prr.plotRecord');
-        $qb->orderBy('pr.id','ASC');
+
+        if (!empty($params['orderField'])) {
+            //$qb->orderBy($params['orderField'], $params['order']);
+        } else {
+            $qb->orderBy('pr.id','ASC');
+        }
+
+        $this->filterQuery($qb, $params['arrFilterField']);
+        $this->singleSearchQuery($qb, $params['arrSingleSearchField']);
+//        echo $qb->getQuery()->getSQL();
         return $qb->getQuery()->getArrayResult();
 
     }
+
+    public function getMouzaListUsesPurchasedLand(){
+
+        $qb = $this->_em->getRepository('AppBundle:Mouza')->createQueryBuilder('m')
+            ->Join('m.purchasedLandRelations', 'plr')
+            ->distinct('m.id')
+            ->where('m.approved=1')
+            ->orderBy('m.name', 'asc');
+        return $qb->getQuery()->getArrayResult();
+
+    }
+
+
 
 }

@@ -16,17 +16,23 @@ class PurchasedLandController extends Controller
     public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
-        $purchasedLands = $em->getRepository('AppBundle:PurchasedLand')->getPurchasedLandList();
-
+        $purchasedLands = $em->getRepository('AppBundle:PurchasedLand')->getPurchasedLandList($request->query->all());
+        $data['landTypes']= array( 'PRIVATE' => 'Private Land', 'DEMESNE' => 'Demesne Land', 'VESTED' => 'Vested Property');
+        $data['purchases']= array(1 => 'Yes', 0 => 'No');
+        $data['leases']= array(1 => 'Yes', 0 => 'No');
         $paginator  = $this->get('knp_paginator');
-        $paginations = $paginator->paginate(
+        $data['lands'] = $paginator->paginate(
             $purchasedLands, /* query NOT result */
             $request->query->getInt('page', 1)/*page number*/,
-            100/*limit per page*/
+            10/*limit per page*/
         );
-        return $this->render('AppBundle:Purchasedland:index.html.twig', array(
-            'lands'=>$paginations
-        ));
+
+        if ($request->isXmlHttpRequest()) {
+            return $this->render('AppBundle:Purchasedland:list_content.html.twig', $data);
+        } else {
+            $data['search_url'] = $this->generateUrl('purchased_land_list');
+            return $this->render('AppBundle:Purchasedland:index.html.twig', $data);
+        }
     }
 
     public function createPurchasedLandAction(Request $request )

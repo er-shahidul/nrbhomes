@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Document;
+use AppBundle\Entity\Mouza;
 use AppBundle\Entity\PlotRecord;
 use AppBundle\Entity\PurchasedLand;
 use AppBundle\Entity\PurchasedLandRelation;
@@ -18,17 +19,21 @@ class PlotRecordController extends Controller
     public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
-        $plotRecords = $em->getRepository('AppBundle:PlotRecord')->getPlotRecordList();
+        $plotRecords = $em->getRepository('AppBundle:PlotRecord')->getPlotRecordList($request->query->all());
+        $data['mouzas'] = $em->getRepository('AppBundle:PlotRecord')->getMouzaListUsesPurchasedLand();
         $paginator  = $this->get('knp_paginator');
-        $paginations = $paginator->paginate(
+        $data['plots'] = $paginator->paginate(
             $plotRecords, /* query NOT result */
             $request->query->getInt('page', 1)/*page number*/,
             10/*limit per page*/
         );
-        //var_dump(count($paginations));
-        return $this->render('AppBundle:PlotRecord:index.html.twig', array(
-            'plots'=>$paginations
-        ));
+
+        if ($request->isXmlHttpRequest()) {
+            return $this->render('AppBundle:PlotRecord:list_content.html.twig', $data);
+        } else {
+            $data['search_url'] = $this->generateUrl('plot_record_list');
+            return $this->render('AppBundle:PlotRecord:index.html.twig', $data);
+        }
     }
 
     public function createPlotRecordAction(Request $request )
@@ -92,6 +97,22 @@ class PlotRecordController extends Controller
             'msg'=>'Document Successfully Delete'
             )
         );
+    }
+
+
+    public function comboDagNumberAction($mouzaId)
+    {
+        //var_dump($mouzaId);die;
+        $dagNumbers = $this->getDoctrine()->getRepository('AppBundle:DagNumber')->getDagNumbersByMouzaWithPlr($mouzaId);
+        //var_dump($dagNumbers);die;
+        $ret = [];
+        foreach ($dagNumbers as $dagNumber) {
+            $ret[] = ['id' => $dagNumber->getId(), 'text' => $dagNumber->getDagNumberName()];
+        }
+        //var_dump($ret);die;
+        return new JsonResponse($ret);
+
+
     }
 
 }

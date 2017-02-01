@@ -19,6 +19,62 @@
             <div class="portlet light">
 
                 <div class="portlet-body">
+                    <form id="form-search" class="form-horizontal" role="form" method="post" action="" style="">
+                        <div class="form-body">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <div class="col-md-12">
+                                            <select class="form-control select2" name="ff[pl.landType]" id="landType" placeholder="{{ 'Land Type'|trans }}">
+                                                <option value=""></option>
+                                                {% for key,landType in landTypes %}
+                                                    <option value="{{ key }}">{{ landType }}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="purchased_section">
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <div class="col-md-12">
+                                                <select class="form-control select2" name="ff[pl.purchased]" id="is_purchased" placeholder="{{ 'Purchased'|trans }}">
+                                                    <option value=""></option>
+                                                    {% for key,purchase in purchases %}
+                                                        <option value="{{ key }}">{{ purchase }}</option>
+                                                    {% endfor %}
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="govt_section" style="display: none">
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <div class="col-md-12">
+                                                <select class="form-control select2" name="ff[pl.leased]" id="is_leased" placeholder="{{ 'Leased'|trans }}">
+                                                    <option value=""></option>
+                                                    {% for key,lease in leases %}
+                                                        <option value="{{ key }}">{{ lease }}</option>
+                                                    {% endfor %}
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <!--/span-->
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <div class="col-md-12">
+                                            <button class="btn green" id="btn-search" data-url="{{ (search_url is defined) ? search_url : '' }}" type="button">{{ 'Search'|trans }}</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
                     <div class='table-data'>
                         {% include "AppBundle:Purchasedland:list_content.html.twig" %}
                     </div>
@@ -27,4 +83,14 @@
         </div>
     </div>
     <!-- END PAGE CONTENT INNER -->
+{% endblock %}
+
+{% block include_javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('bundles/app/purchased-land-list.js') }}" type="text/javascript"></script>
+    {#<script src="{{ asset('bundles/app/mouza-option.js') }}" type="text/javascript"></script>#}
+{% endblock %}
+{% block document_ready %}
+    {{ parent() }}
+    {#MouzaOption.init();#}
 {% endblock %}

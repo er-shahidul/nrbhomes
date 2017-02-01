@@ -69,3 +69,12 @@ plot_record_update:
 plot_record_list:
     path:     /plot-record-list
     defaults: { _controller: AppBundle:PlotRecord:index }
+    options:
+           expose: true
+
+get_dagnumber_uses_plot:
+    path:     /dagnumber-use-plot/{mouzaId}
+    defaults: { _controller: AppBundle:PlotRecord:comboDagNumber}
+    methods: [GET,POST]
+    options:
+           expose: true

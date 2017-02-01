@@ -196,6 +196,7 @@
     'assets/js/jquery.floatThead.min.js'
     'assets/plugins/bootbox/bootbox.min.js'
     'assets/js/app.js'
+    'bundles/app/app-util.js'
     %}
     <script type="text/javascript" src="{{ asset_url }}"></script>
     {% endjavascripts %}
@@ -222,7 +223,7 @@
         jQuery(document).ready(function() {
             Metronic.init(); // init metronic core components
             Layout.init(); // init current layout
-
+            AppUtil.init();
             {% block document_ready %}
             {% endblock %}
         });
